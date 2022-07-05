@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,th,td {
+            border: 2px solid red;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    5<sup>th</sup>July'2022
+    <h1>Basics of HTML</h1>
+    <hr/>
+
+    <table style="border: 2px solid red">
+        <caption><em>Nested Table</em></caption>
+        <tr>
+            <th style="border: 2px solid red">Zone</th>
+            <th  style="border: 2px solid red">State</th></tr>
+        <tr>
+            <td style="border: 2px solid red">South</td>
+        <td><table style="border: 1px solid red">
+            <tr>
+                <th style="border: 2px solid greenyellow">Name</th>
+                <th style="border: 2px solid greenyellow">Capital City</th></tr>
+            <tr>
+                <td style="border: 2px solid greenyellow">Karnataka</td>
+                <td style="border: 2px solid greenyellow">Banglore</td></tr>
+            <tr>
+                <td style="border: 2px solid greenyellow">Tamilnadu</td>
+                <td style="border: 2px solid greenyellow">Chennai</td></tr>
+            <tr>
+                <td style="border: 2px solid greenyellow">Andhra Pradesh</td>
+                <td style="border: 2px solid greenyellow">Hyderabad</td></tr>
+        </table></td>
+    </tr>
+    </table>
+    <hr/>
+    <table>
+        <caption><em>Example of Rowspan</em></caption>
+        <thead>
+         <tr>
+            <th>Department Name</th>
+            <th>Employee Name</th>
+            <th>Salary</th>
+         </tr>
+        </thead>
+        <tbody>
+            <tr><td rowspan="2">HR</td>
+                <td>Atul</td>
+                <td>55000</td>
+            </tr>
+            <tr>
+                <td>Dhiraj</td>
+                <td>45000</td>
+            </tr>
+            <tr><td rowspan="3">Sales</td>
+                <td>Yogesh</td>
+                <td>40000</td>
+            </tr>
+            <tr>
+                <td>Rahul</td>
+                <td>35000</td>
+            </tr>
+            <tr>
+                <td>Pratik</td>
+                <td>30000</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr/>
+
+    <table>
+        <caption><em>Example of Rowspan and Columnspan</em></caption>
+        <thead>
+            <tr>
+                <th>DeptNo</th>
+                <th>Name</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan="2">10</td>
+                <td >Atul</td>
+                <td >55000</td>
+            </tr>
+            <tr>
+                <td >Vishal</td>
+                <td >45000</td>
+            </tr>
+            <tr>
+                <td rowspan="3">20</td>
+                <td >Yogesh</td>
+                <td >40000</td>
+            </tr>
+            <tr>
+                <td >Rahul</td>
+                <td >35000</td>
+            </tr>
+            <tr>
+                <td >Pratik</td>
+                <td >30000</td>
+            </tr>
+            <tr>
+                <td colspan="2">Total Salary</td>
+                <td>205000</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr/>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        table,th,td {
+            border: 2px solid red; 
+            border-collapse:collapse;
+        }
+    </style>
+  </head>
+  <body>
+    <a id="address1"></a>
+    <h1>h1 header</h1>
+    <h2>h2 header</h2>
+    <h3>h3 header</h3>
+    <h4>h4 header</h4>
+    <h5>h5 header</h5>
+    <h6>h6 header</h6>
+    <article style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
+    <p>
+      <span style="font-size:24px; font-weight: bold;color: red;  ">Lorem Ipsum</span> is simply dummy text of the printing and typesetting industry.
+      Lorem Ipsum has been the industry's standard dummy text ever since the
+      1500s, when an unknown printer took a galley of type and scrambled it to
+      make a type specimen book. It has survived not only five centuries, but
+      also the leap into electronic typesetting, remaining essentially
+      unchanged. It was popularised in the 1960s with the release of Letraset
+      sheets containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem
+      Ipsum.
+    </p>
+    <p>
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      Lorem Ipsum has been the industry's standard dummy text ever since the
+      1500s, when an unknown printer took a galley of type and scrambled it to
+      make a type specimen book. It has survived not only five centuries, but
+      also the leap into electronic typesetting, remaining essentially
+      unchanged. It was popularised in the 1960s with the release of Letraset
+      sheets containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem
+      Ipsum.
+    </article>
+    </div>
+    <hr/>
+    <aside>
+    <b>Bold text</b> <br />
+    <i>Italic text</i> <br />
+    H<sub>2</sub>o<br />
+    27<sup>th</sup>Sep'22<br />
+    <u>Underlined text</u><br />
+    <s>Strikeout text</s>
+    <p>52 &#62 45</p>
+    <p>40 &#60 50</p>
+    </aside>
+    <hr/>
+    <code>
+        if(10>20) {
+            return 10;
+        }
+    </code>
+    <pre>
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+         when an unknown printer took a galley of type and scrambled it to make a type
+          specimen book. It has survived not only five centuries,
+          but also the leap into electronic typesetting, remaining essentially unchanged. 
+          It was popularised in the 1960s with the release of Letraset sheets
+           containing Lorem Ipsum passages, and more recently with desktop publishing
+            software like Aldus PageMaker including versions of Lorem Ipsum.
+    </pre>
+    <hr/>
+    
+    <table style="border: 2px solid blue ; border-collapse:collapse;">
+        <caption>Department Table</caption>
+        <thead >
+            <tr style="border: 2px solid blue" >
+                <th style="border: 2px solid blue; border-collapse:collapse;">Dept No</td>
+                <th style="border: 2px solid blue; border-collapse:collapse">Dept Name</td>
+                <th style="border: 2px solid blue; border-collapse:collapse;">Location</td>
+            </tr>
+        </thead>
+        <tbody  >
+            <tr style="border: 2px solid blue" >
+                <td style="border: 2px solid blue">10</td>
+                <td style="border: 2px solid blue">Accounting</td>
+                <td style="border: 2px solid blue">Newyork</td>
+            </tr>
+            <tr style="border: 2px solid blue">
+                <td style="border: 2px solid blue">20</td>
+                <td style="border: 2px solid blue">Research</td>
+                <td style="border: 2px solid blue">Dallas</td>
+            </tr>
+            <tr style="border: 2px solid blue">
+                <td style="border: 2px solid blue">30</td>
+                <td style="border: 2px solid blue">Sales</td>
+                <td style="border: 2px solid blue">Chicago</td>
+            </tr>
+            <tr style="border: 2px solid blue">
+                <td style="border: 2px solid blue">40</td>
+                <td style="border: 2px solid blue">Operations</td>
+                <td style="border: 2px solid blue">Boston</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr/>        
+        <table>
+            <caption><em style="font-weight:bold">Nested Table</em></caption>
+            <thead>
+                <tr>
+                    <th>Zone</th>
+                    <th>State</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>South</td>
+                    <td>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Capital City</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Karnataka</td>
+                                    <td>Bangalore</td>
+                                </tr>
+                                <tr>
+                                    <td>Telangana</td>
+                                    <td>Hyderabad</td>
+                                </tr>
+                                <tr>
+                                    <td>Tamilnadu</td>
+                                    <td>Chennai</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr/>
+        <table>
+            <caption><b>Table Formatting</b> </caption>
+            <thead>
+                <tr>
+                    <th>DeptNo</th>
+                    <th>Name</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="2">10</td>
+                    <td>Sita</td>
+                    <td>34000</td>
+                </tr>
+                <tr>
+                    <td>Ram</td>
+                    <td>24000</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">20</td>
+                    <td>Lakshman</td>
+                    <td>45000</td>
+                </tr>
+                <tr>
+                    <td>Lava</td>
+                    <td>32000</td>
+                </tr>
+                <tr>
+                    <td>Kusha</td>
+                    <td>30000</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Total Salary</td>
+                    <td>340000</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr/>
+        <!--Ordered List-->
+        <ol>
+            <li>India</li>
+            <li>Australia</li>
+            <li>USA</li>
+        </ol>
+        <!--Uppercase Alphabets-->
+        <ol type="A">
+            <li>India</li>
+            <li>Australia</li>
+            <li>USA</li>
+        </ol>
+        <!--Uppercase Roman letters-->
+        <ol type="I">
+            <li>India</li>
+            <li>Australia</li>
+            <li>USA</li>
+        </ol>
+        <!--lower case alphabets start from 'c'-->
+        <ol type="a" start="3">
+            <li>India</li>
+            <li>Australia</li>
+            <li>USA</li>
+        </ol>
+
+        <!--Unordered List-->
+        <ul style="list-style-type: disc">
+            <li>India</li>
+            <li>Australia</li>
+            <li>USA</li>
+        </ul>
+        <ul style="list-style-type: square">
+            <li>India</li>
+            <li>Australia</li>
+            <li>USA</li>
+        </ul>
+        <ul style="list-style-type: circle">
+            <li>India</li>
+            <li>Australia</li>
+            <li>USA</li>
+        </ul>
+        <hr/>
+        <!--Anchor tags-->
+        <a href="http://www.google.com" target="_self">google</a> <br/>
+        <a href="test.html" target="_blank">test</a><br/>
+        <a href="#address1">Top</a>
+  </body>
+</html>
