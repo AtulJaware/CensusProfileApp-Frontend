@@ -2,14 +2,18 @@ import React, { Component } from 'react';
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddMember = () => {
   const params = useParams();
   console.log(params);
 
+  // Define state using useState
+  let navigate = useNavigate();
+
   // define state
   const [mem, setMem] = useState({
-    id: "",
+    id:"1",
     firstName: "",
     lastName: "",
     dob: "",
@@ -39,6 +43,7 @@ const AddMember = () => {
       .then((res) => {
         console.log(res);
         alert("Member Added with ID " + res.data.id + " successfully!");
+        navigate("/members");
       })
       .catch((error) => console.log(error));
   };
@@ -47,19 +52,6 @@ const AddMember = () => {
       <div className="w-50 mx-auto mt-3">
         <p className="display-6">Add New Member</p>
         <form className="border p-3" onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="empName" className="form-label float-start">
-              ID
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="id"
-              value={mem.id}
-              name="id"
-              onChange={handleChange}
-            />
-          </div>
           <div className="mb-3">
             <label htmlFor="firstName" className="form-label float-start">
               First Name
@@ -152,7 +144,6 @@ const AddMember = () => {
               onChange={handleChange}
             />
           </div>
-
           <div className="d-grid gap-2">
             <button type="submit" className="btn btn-primary">
               Add

@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
-import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Register = () => { 
+const Register = () => {
+  const params = useParams();
+  console.log(params);
 
-    const [ user, setUser] = useState({
-    id: "",
+  // Define state using useState
+  let navigate = useNavigate();
+
+  // define state
+  const [user, setUser] = useState({
+    id: "1",
     firstName: "",
     lastName: "",
     dob: "",
@@ -14,14 +22,19 @@ const Register = () => {
     password: "",
   });
   const handleChange = (event) => {
-    //console.log(event);
-    console.log(event.target.name); // field name
-    console.log(event.target.value); // filed value
+    console.log(event.target.name); // returns field name
+    console.log(event.target.value); // retruns filed value
 
-    const newUser = {};
+    // copy user details to newUser obj
+    const newUser = { ...user };
+
+    
     newUser[event.target.name] = event.target.value;
-    setUser(()=>user, newUser);
+
+    // update user obj with newUser obj details
+    setUser(newUser);
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
@@ -29,27 +42,14 @@ const Register = () => {
       .then((res) => {
         console.log(res);
         alert("User Added with ID " + res.data.id + " successfully!");
+        navigate("/member/add");
       })
       .catch((error) => console.log(error));
   };
-  console.log(user);
   return (
     <div className="w-50 mx-auto mt-3">
       <p className="display-6">User Registration</p>
-      <form className="border p-3">
-        <div className="mb-3">
-          <label htmlFor="id" className="form-label float-start">
-            ID
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="id"
-            value={user.id}
-            name="id"
-            onChange={handleChange}
-          />
-        </div>
+      <form className="border p-3" onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="firstName" className="form-label float-start">
             First Name

@@ -9,7 +9,8 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import NotFound from "./components/notfound";
 import AddMember from "./components/addMember";
 import UpdateMember from "./components/updateMember";
-
+import Users from "./components/users";
+import UpdateUser from "./components/updateUser";
 function App() {
   return (
     <div className="App">
@@ -22,6 +23,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/member/update/:id" element={<UpdateMember />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/user/update/:id" element={<UpdateUser />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
