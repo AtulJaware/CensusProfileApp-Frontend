@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate} from "react-router-dom";
 import axios from "axios";
 
 const UpdateUser = () => {
   const params = useParams();
+  let navigate = useNavigate();
   console.log(params);
 
   // define state
@@ -49,6 +50,7 @@ const UpdateUser = () => {
       .then((res) => {
         console.log(res);
         alert("User Updated with ID " + res.data.id + " successfully!");
+        navigate("/users");
       })
       .catch((error) => console.log(error));
   };

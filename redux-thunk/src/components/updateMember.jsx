@@ -9,7 +9,7 @@ const UpdateMember = () => {
 
   // define state
   const [mem, setMem] = useState({
-    id: "",
+    memId: "",
     firstName: "",
     lastName: "",
     dob: "",
@@ -47,10 +47,10 @@ const UpdateMember = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .put(`http://localhost:8081/member/${params.id}`, mem)
+      .put(`http://localhost:8081/member/update/${params.id}`, mem)
       .then((res) => {
         console.log(res);
-        alert("Member Updated with ID " + res.data.id + " successfully!");
+        alert("Member Updated with ID " + res.data.memId + " successfully!");
         navigate("/members");
       })
       .catch((error) => console.log(error));
@@ -62,14 +62,14 @@ const UpdateMember = () => {
         <form className="border p-3" onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="id" className="form-label float-start">
-              ID
+             Member ID
             </label>
             <input
               type="text"
               className="form-control"
-              id="id"
-              value={mem.id}
-              name="id"
+              id="memId"
+              value={mem.memId}
+              name="memId"
               onChange={handleChange}
               disabled
             />

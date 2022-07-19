@@ -8,7 +8,7 @@ class Users extends Component {
         componentDidMount() {
           // send get request
           axios
-            .get("http://localhost:8081/user")
+            .get("http://localhost:8081/users")
             .then((response) => {
               console.log(response);
               this.setState({ users: response.data });
@@ -19,11 +19,11 @@ class Users extends Component {
   handleDelete = (id) => {
     // http://localhost:8081/user/{id}
     axios
-      .delete(`http://localhost:8081/user/${id}`)
+      .delete(`http://localhost:8081/user/delete/${id}`)
       .then((res) => {
         console.log(res);
         // return all users except user which is selected for delete
-        const user = this.state.users.filter((user) => user.id !== id);
+        const user = this.state.users.filter((user) => user.userId !== id);
 
         // update state object with users
         this.setState({ users: user });
@@ -35,37 +35,33 @@ class Users extends Component {
         return (
             <div className="w-75 mx-auto">
             <h3 className="mt-4">User's Data</h3>
-            <Link to="/register" className="btn btn-primary float-end mb-2">
-              Add New User</Link>
-            <table className="table w-75 mx-auto">
+            <table className="table w-75 mx-auto border border-secondary rounded mt-4 p-2 shadow p-3 mb-5 bg-body rounded">
               <thead>
                 <tr>
-                  <th>Id</th>
+                  <th>User Id</th>
                   <th>First Name</th>
                   <th>Last Name</th>
                   <th>Date of Birth</th>
                   <th>Contact No.</th>
                   <th>Email</th>
-                  <th>Password</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {this.state.users.map((user) => (
-                  <tr key={user.id}>
-                    <td>{user.id}</td>
+                  <tr key={user.userId}>
+                    <td>{user.userId}</td>
                     <td>{user.firstName}</td>
                     <td>{user.lastName}</td>
                     <td>{user.dob}</td>
                     <td>{user.contactNo}</td>
-                    <td>{user.email}</td>
-                    <td>{user.password}</td>
-                    <td><Link to={`/user/update/${user.id}`}>
+                    <td>{user.login.email}</td>
+                    <td><Link to={`/user/update/${user.userId}`}>
                       <i className="bi bi-pencil-square me-3"
                             type="button"></i></Link>
                   <i className="bi bi-trash-fill"
                   type="button"
-                  onClick={() => this.handleDelete(user.id)} ></i></td>
+                  onClick={() => this.handleDelete(user.userId)} ></i></td>
                   </tr>
                 ))}
               </tbody>
