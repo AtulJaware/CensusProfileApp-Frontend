@@ -7,7 +7,7 @@ class Register extends Component{
   render() { 
         return (
 
-  <div class="w-25 mx-auto border border-secondary rounded mt-4 p-2 shadow-lg p-3 mb-5 bg-body rounded">
+  <div className="w-25 mx-auto border border-secondary rounded mt-4 p-2 shadow-lg p-3 mb-5 bg-body rounded">
     <h2 className="mb-4"><b>Register</b></h2>
     <div className="text-center w-75 mx-auto">
         <Link to="/register/admin" className="btn btn-primary me-4 mt-2 mb-4">

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useParams,useNavigate} from "react-router-dom";
 import axios from "axios";
 
 const UpdateUser = () => {
+  const login = useSelector((state) => state.login.login);
   const params = useParams();
   let navigate = useNavigate();
   console.log(params);
@@ -135,7 +137,7 @@ const UpdateUser = () => {
             className="form-control"
             id="email"
             aria-describedby="emailHelp"
-            value={user.email}
+            value={login.email}
             name="email"
             onChange={handleChange}
           />
@@ -148,7 +150,7 @@ const UpdateUser = () => {
             type="password"
             className="form-control"
             id="password"
-            value={user.password}
+            value={login.password}
             name="password"
             onChange={handleChange}
           />

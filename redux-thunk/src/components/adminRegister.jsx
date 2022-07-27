@@ -18,7 +18,7 @@ const AdminRegister = () => {
     contact: "",
     email: "",
     password: "",
-    role: "",
+    role: "Admin",
   });
   const handleChange = (event) => {
     console.log(event.target.name); // returns field name
@@ -41,14 +41,14 @@ const AdminRegister = () => {
       .then((res) => {
         console.log(res);
         alert("Admin Registered with Admin ID " + res.data.adminId + " successfully!");
-        navigate("/members");
+        navigate("/login");
       })
       .catch((error) => console.log(error));
   };
   return (
     <div className="w-50 mx-auto mt-3">
       <p className="display-6">Admin Registration</p>
-      <form className="border p-3" onSubmit={handleSubmit}>
+      <form className="w-75 mx-auto border border-secondary rounded mt-4 p-2 shadow-lg p-3 mb-5 bg-body rounded" onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label float-start">
             Name
@@ -103,10 +103,6 @@ const AdminRegister = () => {
             onChange={handleChange}
           />
         </div>
-        <select className="form-select mb-3" aria-label="Default select example">
-            <option selected>Role</option>
-            <option value="2">Admin</option>
-          </select>
         <div className="d-grid gap-2">
           <button type="submit" className="btn btn-primary">
             Register

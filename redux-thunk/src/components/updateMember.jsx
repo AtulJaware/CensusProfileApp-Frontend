@@ -17,6 +17,12 @@ const UpdateMember = () => {
     relationShip: "",
     qualification: "",
     marital_status: "",
+    id: "",
+    d_no: "",
+    street: "",
+    city: "",
+    state: "",
+    pincode: ""
   });
 
   //useEffect(callback function,[condition] )

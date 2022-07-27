@@ -1,29 +1,30 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useParams,useNavigate} from "react-router-dom";
 import axios from "axios";
 
-const UpdateUser = () => {
+const UpdateAdmin = () => {
+  const login = useSelector((state) => state.login.login);
   const params = useParams();
   let navigate = useNavigate();
   console.log(params);
 
   // define state
-  const [user, setUser] = useState({
-    id: "",
-    firstName: "",
-    lastName: "",
-    dob: "",
-    contactNo: "",
+  const [admin, setAdmin] = useState({
+    adminId: "",
+    name: "",
+    contact: "",
     email: "",
     password: "",
+    role: "Admin"
   });
 
   //useEffect(callback function,[condition] )
   // get existing user details using id and update user state obj
   useEffect(() => {
     axios
-      .get(`http://localhost:8081/user/${params.id}`)
-      .then((res) => setUser(res.data))
+      .get(`http://localhost:8081/admin/${params.id}`)
+      .then((res) => setAdmin(res.data))
       .catch((err) => console.log(err));
   }, []);
 
@@ -32,96 +33,70 @@ const UpdateUser = () => {
     console.log(event.target.value); // retruns filed value
 
     // copy user details to newUser obj
-    const newUser = { ...user };
+    const newAdmin = { ...admin };
 
     //newUser.id =10;
     //newUser["id"] = 10;
     //update newUser object
-    newUser[event.target.name] = event.target.value;
+    newAdmin[event.target.name] = event.target.value;
 
     // update user obj with newUser obj details
-    setUser(newUser);
+    setAdmin(newAdmin);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .put(`http://localhost:8081/user/${params.id}`, user)
+      .put(`http://localhost:8081/admin/update/${params.id}`, admin)
       .then((res) => {
         console.log(res);
-        alert("User Updated with ID " + res.data.id + " successfully!");
-        navigate("/users");
+        alert("Admin Updated with ID " + res.data.adminId + " successfully!");
+        navigate("/profile");
       })
       .catch((error) => console.log(error));
   };
   return (
     <div>
       <div className="w-50 mx-auto mt-3">
-        <p className="display-6">Update User</p>
+        <p className="display-6">Update Admin</p>
         <form className="border p-3" onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="id" className="form-label float-start">
-              ID
+            <label htmlFor="adminId" className="form-label float-start">
+              Admin ID
             </label>
             <input
               type="text"
               className="form-control"
-              id="id"
-              value={user.id}
-              name="id"
+              id="adminId"
+              value={admin.adminId}
+              name="adminId"
               onChange={handleChange}
               disabled
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="firstName" className="form-label float-start">
-              First Name
+            <label htmlFor="name" className="form-label float-start">
+              Name
             </label>
             <input
               type="text"
               className="form-control"
-              id="firstName"
-              value={user.firstName}
-              name="firstName"
+              id="name"
+              value={admin.name}
+              name="name"
               onChange={handleChange}
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="lastName" className="form-label float-start">
-              Last Name
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="lastName"
-              value={user.lastName}
-              name="lastName"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="dob" className="form-label float-start">
-              Date of Birth
-            </label>
-            <input
-              type="date"
-              className="form-control"
-              id="dob"
-              value={user.dob}
-              name="dob"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="contactNo" className="form-label float-start">
+            <label htmlFor="contact" className="form-label float-start">
               Contact No.
             </label>
             <input
               type="text"
               className="form-control"
-              id="contactNo"
-              name="contactNo"
-              value={user.contactNo}
+              id="contact"
+              name="contact"
+              value={admin.contact}
               onChange={handleChange}
             />
           </div>
@@ -135,7 +110,7 @@ const UpdateUser = () => {
             className="form-control"
             id="email"
             aria-describedby="emailHelp"
-            value={user.email}
+            value={login.email}
             name="email"
             onChange={handleChange}
           />
@@ -148,7 +123,7 @@ const UpdateUser = () => {
             type="password"
             className="form-control"
             id="password"
-            value={user.password}
+            value={login.password}
             name="password"
             onChange={handleChange}
           />
@@ -165,4 +140,4 @@ const UpdateUser = () => {
   );
 };
 
-export default UpdateUser;
+export default UpdateAdmin;

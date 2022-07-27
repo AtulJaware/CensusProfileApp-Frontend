@@ -7,13 +7,14 @@ const UserRegister = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [users, setUser] = useState({
-    userId: "",
     firstName: "",
     lastName: "",
     dob: "",
     contactNo: "",
     email: "",
     password: "",
+    role: "User",
+    status: "Pending",
   });
 
   const userl = useSelector((state) => state.login.users);
@@ -33,27 +34,11 @@ const UserRegister = () => {
   console.log(users);
   return (
     <div>
-      <h1>Register Page</h1>
-      <div>
+        <div className="w-50 mx-auto mt-3">
+      <p className="display-6">User Registration</p>
         <form
           onSubmit={handleSubmit}
-          className="w-50 mx-auto border border-secondary rounded mt-4 p-2 shadow-lg p-3 mb-5 bg-body rounded">
-          <p className="text-center fs-4 bg-secondary text-white">
-            User Register Form
-          </p>
-          <div className="mb-3">
-            <label htmlFor="userId" className="form-label float-start">
-            User ID
-          </label>
-          <input
-            type="number"
-            className="form-control"
-            id="userId"
-            value={users.userId}
-            name="userId"
-            onChange={handleChange}
-          />
-        </div>
+          className="w-75 mx-auto border border-secondary rounded mt-4 p-2 shadow-lg p-3 mb-5 bg-body rounded">
           <div className="mb-3">
             <label htmlFor="firstName" className="form-label float-start">
             First Name
