@@ -13,6 +13,10 @@ import UpdateUser from "./components/updateUser";
 import AdminRegister from "./components/adminRegister";
 import UserRegister from "./components/userRegister";
 import Logout from "./components/logout";
+import Profile from "./components/profile";
+import UpdateAdmin from "./components/updateAdmin";
+import Address from "./components/address";
+
 function App() {
   return (
     <div className="App">
@@ -28,8 +32,11 @@ function App() {
         <Route path="/member/update/:id" element={<UpdateMember />} />
         <Route path="/users" element={<Users />} />
         <Route path="/user/update/:id" element={<UpdateUser />} />
+        <Route path="/admin/update/:id" element={<UpdateAdmin />} />
         <Route path="/register/admin" element={<AdminRegister />} />
         <Route path="/register/user" element={<UserRegister />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/members/address/:id" element={<Address />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

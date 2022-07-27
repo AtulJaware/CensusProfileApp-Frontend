@@ -16,7 +16,7 @@ export const registerAction = (users) => async (dispatch) => {
 
 // login action
 export const loginAction = (login) => (dispatch) => {
-  axios
+   axios
     .post("http://localhost:8081/login/dto", login)
     .then((res) => {
       console.log(res);

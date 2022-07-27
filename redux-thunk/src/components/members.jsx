@@ -48,6 +48,7 @@ class Members extends Component {
                   <th>Marital Status</th>
                   <th>Qualification</th>
                   <th>Relationship</th>
+                  <th>Address</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -62,6 +63,8 @@ class Members extends Component {
                     <td>{mem.marital_status}</td>
                     <td>{mem.qualification}</td>
                     <td>{mem.relationShip}</td>
+                    <td><Link to ={`address/${mem.id}`}
+                    className="btn btn-secondary">View</Link></td>
                     <td><Link to={`/member/update/${mem.memId}`}>
                       <i className="bi bi-pencil-square me-3"
                             type="button"></i></Link>

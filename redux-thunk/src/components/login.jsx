@@ -126,7 +126,7 @@ const Login = () => {
           value={login.role}
           onChange={handleChange}
         >
-          <option selected>Role</option>
+          <option defaultValue>Role</option>
           <option value="Admin">Admin</option>
           <option value="User">User</option>
         </select>
