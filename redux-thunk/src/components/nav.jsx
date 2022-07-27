@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 const Nav = () => {
   const login = useSelector((state) => state.login.login);
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
           <b>Census Profiling Application</b>
@@ -28,20 +28,18 @@ const Nav = () => {
                 Home
               </NavLink>
             </li>
-            {login.loggedIn && (
+
             <li className="nav-item">
               <NavLink className="nav-link" to="/members">
                 Members
               </NavLink>
             </li>
-            )}
-            {login.loggedIn && (
+
             <li className="nav-item">
               <NavLink className="nav-link" to="/users">
                 Users
               </NavLink>
             </li>
-            )}
           </ul>
           <form className="d-flex" role="search">
             <input
@@ -58,33 +56,22 @@ const Nav = () => {
             {login.loggedIn ? (
               <li className="nav-item">
                 <NavLink to="/logout" className="nav-link">
-                  <i className="bi bi-power"></i> <br></br>
                   Logout
                 </NavLink>
               </li>
             ) : (
               <li className="nav-item">
                 <NavLink to="/login" className="nav-link">
-                  <i className="bi bi-unlock-fill"></i><br></br>
                   Login
                 </NavLink>
               </li>
             )}
-            {login.loggedIn ? (
-              <li className="nav-item">
-                <NavLink to="/profile" className="nav-link">
-                  <i className="bi bi-person-square"></i><br></br>
-                  Profile
-                </NavLink>
-              </li>
-            ) : (
+
             <li className="nav-item">
               <NavLink to="/register" className="nav-link">
-                <i className="bi bi-person-plus-fill"></i> <br></br>
                 Register
               </NavLink>
             </li>
-            )}
           </ul>
         </div>
       </div>

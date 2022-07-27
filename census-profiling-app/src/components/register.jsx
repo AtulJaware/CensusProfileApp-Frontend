@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const AdminRegister = () => {
+const Register = () => {
   const params = useParams();
   console.log(params);
 
@@ -12,66 +12,93 @@ const AdminRegister = () => {
   let navigate = useNavigate();
 
   // define state
-  const [admin, setAdmin] = useState({
-    adminId: "1",
-    name: "",
-    contact: "",
+  const [user, setUser] = useState({
+    id: "1",
+    firstName: "",
+    lastName: "",
+    dob: "",
+    contactNo: "",
     email: "",
     password: "",
-    role: "",
   });
   const handleChange = (event) => {
     console.log(event.target.name); // returns field name
     console.log(event.target.value); // retruns filed value
 
-    // copy admin details to newAdmin obj
-    const newAdmin = { ...admin };
+    // copy user details to newUser obj
+    const newUser = { ...user };
 
     
-    newAdmin[event.target.name] = event.target.value;
+    newUser[event.target.name] = event.target.value;
 
-    // update admin obj with newAdmin obj details
-    setAdmin(newAdmin);
+    // update user obj with newUser obj details
+    setUser(newUser);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post(`http://localhost:8081/admin/register`, admin)
+      .post(`http://localhost:8081/user`, user)
       .then((res) => {
         console.log(res);
-        alert("Admin Registered with Admin ID " + res.data.adminId + " successfully!");
-        navigate("/members");
+        alert("User Added with ID " + res.data.id + " successfully!");
+        navigate("/member/add");
       })
       .catch((error) => console.log(error));
   };
   return (
     <div className="w-50 mx-auto mt-3">
-      <p className="display-6">Admin Registration</p>
+      <p className="display-6">User Registration</p>
       <form className="border p-3" onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="name" className="form-label float-start">
-            Name
+          <label htmlFor="firstName" className="form-label float-start">
+            First Name
           </label>
           <input
             type="text"
             className="form-control"
-            id="name"
-            value={admin.name}
-            name="name"
+            id="firstName"
+            value={user.firstName}
+            name="firstName"
             onChange={handleChange}
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="contact" className="form-label float-start">
+          <label htmlFor="lastName" className="form-label float-start">
+            Last Name
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="lastName"
+            value={user.lastName}
+            name="lastName"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="dob" className="form-label float-start">
+            Date of Birth
+          </label>
+          <input
+            type="date"
+            className="form-control"
+            id="dob"
+            value={user.dob}
+            name="dob"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="contactNo" className="form-label float-start">
             Contact No.
           </label>
           <input
             type="number"
             className="form-control"
-            id="contact"
-            name="contact"
-            value={admin.contact}
+            id="contactNo"
+            name="contactNo"
+            value={user.contactNo}
             onChange={handleChange}
           />
         </div>
@@ -85,7 +112,7 @@ const AdminRegister = () => {
             className="form-control"
             id="email"
             aria-describedby="emailHelp"
-            value={admin.email}
+            value={user.email}
             name="email"
             onChange={handleChange}
           />
@@ -98,15 +125,11 @@ const AdminRegister = () => {
             type="password"
             className="form-control"
             id="password"
-            value={admin.password}
+            value={user.password}
             name="password"
             onChange={handleChange}
           />
         </div>
-        <select className="form-select mb-3" aria-label="Default select example">
-            <option selected>Role</option>
-            <option value="2">Admin</option>
-          </select>
         <div className="d-grid gap-2">
           <button type="submit" className="btn btn-primary">
             Register
@@ -117,4 +140,4 @@ const AdminRegister = () => {
   );
 };
 
-export default AdminRegister;
+export default Register;

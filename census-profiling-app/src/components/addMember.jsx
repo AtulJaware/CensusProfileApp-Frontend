@@ -13,7 +13,7 @@ const AddMember = () => {
 
   // define state
   const [mem, setMem] = useState({
-    memId:"1",
+    id:"1",
     firstName: "",
     lastName: "",
     dob: "",
@@ -39,10 +39,10 @@ const AddMember = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post(`http://localhost:8081/member/add`, mem)
+      .post(`http://localhost:8081/member`, mem)
       .then((res) => {
         console.log(res);
-        alert("Member Added with ID " + res.data.memId + " successfully!");
+        alert("Member Added with ID " + res.data.id + " successfully!");
         navigate("/members");
       })
       .catch((error) => console.log(error));
