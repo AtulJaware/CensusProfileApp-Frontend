@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+  <body>
+    <nav>
+        <ul>
+          <li><a href="../bootstrap/home.html">home</a></li>
+          <li><a href="#">products</a></li>
+          <li><a href="../bootstrap/login.html">login</a></li>
+          <li><a href="../bootstrap/register.html">Register</a></li>
+        </ul>
+      </nav>
+    <form>
+        <caption><b>Sample Test Form</b></caption> <br />
+        <label>Username</label>
+        <input type="text" /> <br />
+        <label>Password</label>
+        <input type="password" /> <br />
+        <label>Date</label>
+        <input type="date" /> <br />
+        <label>Email</label>
+        <input type="email" placeholder="Enter email address"/> <br />
+        <label>Contact No.</label>
+        <input type="tel" placeholder="Enter contact number" /> <br />
+        <label>Gender</label> <br />
+        <label>Male</label>
+        <input type="radio" name="Gender" />
+        <label>Female</label>
+        <input type="radio" name="Gender" /> <br />
+        <label>Search country</label>
+        <input id="country_name" name="country_name" type="search" list="country" />
+        <datalist id="country">
+            <option value="Australia"></option>
+            <option value="Austria"></option>
+            <option value="Algeria"></option>
+            <option value="Andorra"></option>
+            <option value="Angola"></option>
+          </datalist> <br />
+        <label>I agree terms and conditions</label>
+        <input type="checkbox" /> <br />
+        <input type="button" value="Submit"/> 
+    </form>
+    <br />
+    <hr />
+    <br />
+    <form>
+        <table>
+            <caption><b>Sample Test Form</b></caption>
+            <tbody>
+                <tr>
+                    <td><label>Username</label></td>
+                    <td><input
+                        type="text"
+                        placeholder="Enter username"
+                        id="username"
+                        maxlength="5"
+                        size="20"
+                        autofocus
+                        required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Password</label></td>
+                    <td><input
+                        type="password"
+                        placeholder="Enter password"
+                        id="password"
+                        required
+                        pattern="[a-zA-Z0-9]{8}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>DOB</label></td>
+                    <td><input type="date" id="dob" /></td>
+                </tr>
+                <tr>
+                    <td><label>Email</label></td>
+                    <td><input
+                        type="email"
+                        placeholder="Enter email address"
+                        value="test@example.com"
+                        required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Gender</label></td>
+                </tr>
+                <tr>
+                    <td><label>Male <input type="radio" name="Gender" /></label></td>
+                    <td><label>Female <input type="radio" name="Gender" /></label></td>
+                </tr>
+                <tr>
+                    <td><label>Address</label></td>
+                    <td><textarea
+                        cols="20"
+                        rows="3"
+                        placeholder="Enter your address"
+                    ></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Select your country</label></td>
+                    <td><select multiple>
+                        <option>Country Name</option>
+                        <option selected>India</option>
+                        <option>China</option>
+                        <option>Japan</option>
+                        <option>UK</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" /></td>
+                    <td><label>I agree terms and conditions</label></td>
+                </tr>
+                <tr>
+                    <td><input type="button" value="Submit"/></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+  </body>
+</html>
