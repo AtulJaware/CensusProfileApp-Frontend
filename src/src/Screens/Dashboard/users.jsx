@@ -8,7 +8,7 @@ class Users extends Component {
   componentDidMount() {
     // send get request
     axios
-      .get("http://localhost:9002/users")
+      .get("http://localhost:8081/users")
       .then((response) => {
         console.log(response);
         this.setState({ users: response.data });
@@ -19,7 +19,7 @@ class Users extends Component {
   handleDelete = (id) => {
     // http://localhost:9002/user/{id}
     axios
-      .delete(`http://localhost:9002/user/delete/${id}`)
+      .delete(`http://localhost:8081/user/delete/${id}`)
       .then((res) => {
         console.log(res);
         // return all users except user which is selected for delete

@@ -18,7 +18,6 @@ export const ServiceCall = {
   },
 
   deleteApi: (url) => {
-    console.log(url, "deleteApi");
     return new Promise(function (resolve, reject) {
       axios
         .delete(url)

@@ -30,6 +30,7 @@ const Members = () => {
             <th>Marital Status</th>
             <th>Qualification</th>
             <th>Relationship</th>
+            <th>Address</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -45,6 +46,17 @@ const Members = () => {
               <td>{mem.qualification}</td>
               <td>{mem.relationShip}</td>
               <td>
+                {mem.address.d_no +
+                  " " +
+                  mem.address.street +
+                  " " +
+                  mem.address.city +
+                  " " +
+                  mem.address.state +
+                  " " +
+                  mem.address.pincode}
+              </td>
+              <td>
                 <Link to={`/member/update/${mem.memId}`}>
                   <i className="bi bi-pencil-square me-3" type="button"></i>
                 </Link>
@@ -56,7 +68,6 @@ const Members = () => {
                       ServiceCall.deleteApi(
                         ApiConstant.deleteMember(mem.memId)
                       );
-
                       alert(
                         "Member with Id " + mem.memId + " deleted successfully!"
                       );

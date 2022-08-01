@@ -22,7 +22,7 @@ const UpdateUser = () => {
   // get existing user details using id and update user state obj
   useEffect(() => {
     axios
-      .get(`http://localhost:9002/user/${params.id}`)
+      .get(`http://localhost:8081/user/${params.id}`)
       .then((res) => setUser(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -46,7 +46,7 @@ const UpdateUser = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .put(`http://localhost:9002/user/update/${params.id}`, user)
+      .put(`http://localhost:8081/user/update/${params.id}`, user)
       .then((res) => {
         console.log(res);
         alert("User Updated with ID " + res.data.userId + " successfully!");

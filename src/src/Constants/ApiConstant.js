@@ -1,4 +1,4 @@
-export const DOMAIN = "http://localhost:9002/";
+export const DOMAIN = "http://localhost:8081/";
 
 export const ApiConstant = {
   memeberApi: DOMAIN + "members",
