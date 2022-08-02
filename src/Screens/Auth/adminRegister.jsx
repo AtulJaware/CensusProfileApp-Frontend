@@ -36,7 +36,7 @@ const AdminRegister = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post(`http://localhost:9002/admin/register`, admin)
+      .post(`http://localhost:8081/admin/register`, admin)
       .then((res) => {
         console.log(res);
         alert(
@@ -44,7 +44,7 @@ const AdminRegister = () => {
             res.data.adminId +
             " successfully!"
         );
-        navigate("/members");
+        navigate("/login");
       })
       .catch((error) => console.log(error));
   };

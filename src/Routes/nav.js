@@ -12,6 +12,7 @@ import Users from "../Screens/Dashboard/users";
 import AdminRegister from "../Screens/Auth/adminRegister";
 import UserRegister from "../Screens/Auth/userRegister";
 import Logout from "../components/logout";
+import Profile from "../components/profile";
 
 export const Nav = () => (
   <div>
@@ -28,6 +29,7 @@ export const Nav = () => (
       <Route path="/user/update/:id" element={<UpdateUser />} />
       <Route path="/register/admin" element={<AdminRegister />} />
       <Route path="/register/user" element={<UserRegister />} />
+      <Route path="/profile" element={<Profile />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   </div>

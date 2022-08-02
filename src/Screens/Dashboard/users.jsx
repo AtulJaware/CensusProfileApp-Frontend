@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import { UserServiceCall } from "../../Services/ServiceMethod";
+import { UserApiConstant } from "../../Constants/ApiConstant";
 class Users extends Component {
   state = {
     users: [],
   };
   componentDidMount() {
     // send get request
-    axios
-      .get("http://localhost:9002/users")
+    UserServiceCall.getApi(UserApiConstant.getUsers)
       .then((response) => {
         console.log(response);
         this.setState({ users: response.data });
@@ -18,10 +18,9 @@ class Users extends Component {
   // Delete user
   handleDelete = (id) => {
     // http://localhost:9002/user/{id}
-    axios
-      .delete(`http://localhost:9002/user/delete/${id}`)
-      .then((res) => {
-        console.log(res);
+    UserServiceCall.deleteApi(UserApiConstant.deleteUser(id))
+      .then((response) => {
+        console.log(response);
         // return all users except user which is selected for delete
         const user = this.state.users.filter((user) => user.userId !== id);
 
