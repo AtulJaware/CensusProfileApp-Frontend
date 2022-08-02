@@ -1,3 +1,4 @@
 export const AppConstant = {
-  AppName: "Census Profiling Application",
+
+    AppName:"Census Profiling Application",
 };

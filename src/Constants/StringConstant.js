@@ -1,3 +1,3 @@
 export const StringConstant = {
-  successMessage: "logged in successfully!",
+    updateAppMessage : " Updateded Application Successfully!",
 };

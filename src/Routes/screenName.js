@@ -1,5 +1,7 @@
-export const ScreenName = () => {
-  return {
-    LOGIN_SCREEN: "/login",
-  };
+export const ScreenName =()=> {
+
+    return {
+
+        APPLICATION_SCREEN : "/application",
+    };
 };
