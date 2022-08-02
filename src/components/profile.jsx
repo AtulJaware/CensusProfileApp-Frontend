@@ -1,7 +1,9 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { AdminApiConstant, UserApiConstant } from "../Constants/ApiConstant";
+import { USER_TYPE } from "../Constants/StringConstant";
+import { ServiceCall } from "../Services/ServiceMethod";
 
 const Profile = () => {
   const login = useSelector((state) => state.login.login);
@@ -10,14 +12,12 @@ const Profile = () => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    if (login.role === "Admin") {
-      axios
-        .get(`http://localhost:8081/admin/email/${login.email}`)
+    if (login.role === USER_TYPE.ADMIN) {
+      ServiceCall.getApi(AdminApiConstant.getAdmin(login.email))
         .then((res) => setAdmin(res.data))
         .catch((err) => console.log(err));
     }
-    axios
-      .get(`http://localhost:8081/user/email/${login.email}`)
+    ServiceCall.getApi(UserApiConstant.getUserEmail(login.email))
       .then((res) => setUser(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -33,7 +33,7 @@ const Profile = () => {
               <i className="bi bi-person-lines-fill"></i> Personal Details
             </h5>
             <h5>
-              {login.role == "User" ? (
+              {login.role === USER_TYPE.USER ? (
                 <Link to={`/user/update/${user.userId}`}>
                   <i className="bi bi-pencil-square" type="button"></i>
                 </Link>
@@ -73,12 +73,14 @@ const Profile = () => {
                   </td>
                   <td>{login.email}</td>
                 </tr>
-                <tr>
-                  <td>
-                    <b>Date of Birth: </b>
-                  </td>
-                  <td className="ps-3">{admin.dob || user.dob}</td>
-                </tr>
+                {login.role === USER_TYPE.USER && (
+                  <tr>
+                    <td>
+                      <b>Date of Birth: </b>
+                    </td>
+                    <td className="ps-3">{user.dob}</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>

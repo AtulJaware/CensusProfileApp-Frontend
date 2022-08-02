@@ -1,12 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ApiConstant } from "../../Constants/ApiConstant";
+import { MemberApiConstant } from "../../Constants/ApiConstant";
 import { ServiceCall } from "../../Services/ServiceMethod";
 const Members = () => {
   const [members, setMembers] = useState([]);
   useEffect(() => {
-    ServiceCall.getApi(ApiConstant.memeberApi)
+    ServiceCall.getApi(MemberApiConstant.memeberApi)
       .then((response) => {
         console.log(response);
         setMembers(response.data);
@@ -66,7 +66,7 @@ const Members = () => {
                   onClick={() => {
                     if (window.confirm("Are you sure you want to delete")) {
                       ServiceCall.deleteApi(
-                        ApiConstant.deleteMember(mem.memId)
+                        MemberApiConstant.deleteMember(mem.memId)
                       );
                       alert(
                         "Member with Id " + mem.memId + " deleted successfully!"

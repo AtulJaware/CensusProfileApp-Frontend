@@ -13,7 +13,6 @@ import AdminRegister from "../Screens/Auth/adminRegister";
 import UserRegister from "../Screens/Auth/userRegister";
 import Logout from "../components/logout";
 import Profile from "../components/profile";
-import Address from "../components/address";
 
 export const Nav = () => (
   <div>
@@ -31,7 +30,6 @@ export const Nav = () => (
       <Route path="/register/admin" element={<AdminRegister />} />
       <Route path="/register/user" element={<UserRegister />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/member/address/:id" element={<Address />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   </div>

@@ -11,6 +11,7 @@ export const ServiceCall = {
       axios
         .post(url, user)
         .then((response) => {
+          alert("User Registered successfully!");
           resolve(response);
         })
         .catch((error) => reject(error));

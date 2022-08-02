@@ -1,19 +1,16 @@
-import React, { Component } from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { ServiceCall } from "../../Services/ServiceMethod";
+import { MemberApiConstant } from "../../Constants/ApiConstant";
 
-const AddMember = () => {
+const UpdateMember = () => {
   const params = useParams();
-  console.log(params);
-
-  // Define state using useState
   let navigate = useNavigate();
+  console.log(params);
 
   // define state
   const [mem, setMem] = useState({
-    memId: "1",
+    memId: "",
     firstName: "",
     lastName: "",
     dob: "",
@@ -28,13 +25,25 @@ const AddMember = () => {
     state: "",
     pincode: "",
   });
+
+  //useEffect(callback function,[condition] )
+  // get existing mem details using id and update mem state obj
+  useEffect(() => {
+    ServiceCall.getApi(MemberApiConstant.getMember(params.id))
+      .then((response) => setMem(response.data))
+      .catch((err) => console.log(err));
+  }, []);
+
   const handleChange = (event) => {
     console.log(event.target.name); // returns field name
     console.log(event.target.value); // retruns filed value
 
-    // copy mem details to newMem obj
+    // copy mem details to newEmp obj
     const newMem = { ...mem };
 
+    //newmem.id =10;
+    //newmem["id"] = 10;
+    //update newMem object
     newMem[event.target.name] = event.target.value;
 
     // update mem obj with newMem obj details
@@ -43,20 +52,28 @@ const AddMember = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post(`http://localhost:8081/memberDto/add`, mem)
-      .then((res) => {
-        console.log(res);
-        alert("Member Added with ID " + res.data.memId + " successfully!");
-        navigate("/members");
-      })
-      .catch((error) => console.log(error));
+    ServiceCall.putApi(MemberApiConstant.putMember(params.id), mem);
+    navigate("/members");
   };
   return (
     <div>
       <div className="w-50 mx-auto mt-3">
-        <p className="display-6">Add New Member</p>
+        <p className="display-6">Update Member</p>
         <form className="border p-3" onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="id" className="form-label float-start">
+              Member ID
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="memId"
+              value={mem.memId}
+              name="memId"
+              onChange={handleChange}
+              disabled
+            />
+          </div>
           <div className="mb-3">
             <label htmlFor="firstName" className="form-label float-start">
               First Name
@@ -215,9 +232,10 @@ const AddMember = () => {
               onChange={handleChange}
             />
           </div>
+
           <div className="d-grid gap-2">
             <button type="submit" className="btn btn-primary">
-              Add
+              Update
             </button>
           </div>
         </form>
@@ -225,4 +243,5 @@ const AddMember = () => {
     </div>
   );
 };
-export default AddMember;
+
+export default UpdateMember;

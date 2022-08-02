@@ -1,50 +1,74 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { ServiceCall } from "../../Services/RegisterServiceMethods";
-import { ApiConstant } from "../../Constants/ApiConstant";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { UserServiceCall } from "../../Services/ServiceMethod";
+import { UserApiConstant } from "../../Constants/ApiConstant";
 
-const UserRegister = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [users, setUser] = useState({
+const UpdateUser = () => {
+  const params = useParams();
+  let navigate = useNavigate();
+  console.log(params);
+
+  // define state
+  const [user, setUser] = useState({
     userId: "",
     firstName: "",
     lastName: "",
     dob: "",
     contactNo: "",
-    email: "",
-    password: "",
-    role: "User",
+    login: {
+      email: "",
+      password: "",
+    },
   });
 
-  const userl = useSelector((state) => state.login.users);
+  //useEffect(callback function,[condition] )
+  // get existing user details using id and update user state obj
+  useEffect(() => {
+    UserServiceCall.getApi(UserApiConstant.getUser(params.id)).then(
+      (response) => setUser(response.data)
+    );
+  }, []);
 
   const handleChange = (event) => {
-    const newUser = { ...users };
+    console.log(event.target.name); // returns field name
+    console.log(event.target.value); // retruns filed value
+
+    // copy user details to newUser obj
+    const newUser = { ...user };
+
+    //newUser.id =10;
+    //newUser["id"] = 10;
+    //update newUser object
     newUser[event.target.name] = event.target.value;
+
+    // update user obj with newUser obj details
     setUser(newUser);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    //dispatch(registerAction(users));
-    ServiceCall.postApi(ApiConstant.registerUser, users);
-    alert("User Registered successfully!");
-    navigate("/login");
+    UserServiceCall.putApi(UserApiConstant.putUser(params.id), user);
+    navigate("/users");
   };
-  console.log(users);
   return (
     <div>
-      <h1>Register Page</h1>
-      <div>
-        <form
-          onSubmit={handleSubmit}
-          className="w-50 mx-auto border border-secondary rounded mt-4 p-2 shadow-lg p-3 mb-5 bg-body rounded"
-        >
-          <p className="text-center fs-4 bg-secondary text-white">
-            User Register Form
-          </p>
+      <div className="w-50 mx-auto mt-3">
+        <p className="display-6">Update User</p>
+        <form className="border p-3" onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="useId" className="form-label float-start">
+              User ID
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="userId"
+              value={user.userId}
+              name="userId"
+              onChange={handleChange}
+              disabled
+            />
+          </div>
           <div className="mb-3">
             <label htmlFor="firstName" className="form-label float-start">
               First Name
@@ -53,7 +77,7 @@ const UserRegister = () => {
               type="text"
               className="form-control"
               id="firstName"
-              value={users.firstName}
+              value={user.firstName}
               name="firstName"
               onChange={handleChange}
             />
@@ -66,7 +90,7 @@ const UserRegister = () => {
               type="text"
               className="form-control"
               id="lastName"
-              value={users.lastName}
+              value={user.lastName}
               name="lastName"
               onChange={handleChange}
             />
@@ -79,7 +103,7 @@ const UserRegister = () => {
               type="date"
               className="form-control"
               id="dob"
-              value={users.dob}
+              value={user.dob}
               name="dob"
               onChange={handleChange}
             />
@@ -89,11 +113,11 @@ const UserRegister = () => {
               Contact No.
             </label>
             <input
-              type="number"
+              type="text"
               className="form-control"
               id="contactNo"
               name="contactNo"
-              value={users.contactNo}
+              value={user.contactNo}
               onChange={handleChange}
             />
           </div>
@@ -107,7 +131,7 @@ const UserRegister = () => {
               className="form-control"
               id="email"
               aria-describedby="emailHelp"
-              value={users.email}
+              value={user.login.email}
               name="email"
               onChange={handleChange}
             />
@@ -120,14 +144,15 @@ const UserRegister = () => {
               type="password"
               className="form-control"
               id="password"
-              value={users.password}
+              value={user.login.password}
               name="password"
               onChange={handleChange}
             />
           </div>
+
           <div className="d-grid gap-2">
             <button type="submit" className="btn btn-primary">
-              Register
+              Update
             </button>
           </div>
         </form>
@@ -135,4 +160,5 @@ const UserRegister = () => {
     </div>
   );
 };
-export default UserRegister;
+
+export default UpdateUser;
