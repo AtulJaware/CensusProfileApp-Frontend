@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { ServiceCall } from "../../Services/ServiceMethod";
-import { ApiConstant } from "../../Constants/ApiConstant";
+import { UserServiceCall } from "../../Services/ServiceMethod";
+import { UserApiConstant } from "../../Constants/ApiConstant";
 
 const UpdateUser = () => {
   const params = useParams();
@@ -25,7 +24,9 @@ const UpdateUser = () => {
   //useEffect(callback function,[condition] )
   // get existing user details using id and update user state obj
   useEffect(() => {
-    ServiceCall.getApi(ApiConstant.getUser).then((res) => setUser(res.data));
+    UserServiceCall.getApi(UserApiConstant.getUser(params.id)).then(
+      (response) => setUser(response.data)
+    );
   }, []);
 
   const handleChange = (event) => {
@@ -46,14 +47,8 @@ const UpdateUser = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .put(`http://localhost:9002/user/update/${params.id}`, user)
-      .then((res) => {
-        console.log(res);
-        alert("User Updated with ID " + res.data.userId + " successfully!");
-        navigate("/users");
-      })
-      .catch((error) => console.log(error));
+    UserServiceCall.putApi(UserApiConstant.putUser(params.id), user);
+    navigate("/users");
   };
   return (
     <div>

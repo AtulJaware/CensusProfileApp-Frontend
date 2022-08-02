@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ServiceCall } from "../../Services/RegisterServiceMethods";
-import { ApiConstant } from "../../Constants/ApiConstant";
+import { UserApiConstant } from "../../Constants/ApiConstant";
 
 const UserRegister = () => {
   const dispatch = useDispatch();
@@ -28,9 +28,8 @@ const UserRegister = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    //dispatch(registerAction(users));
-    ServiceCall.postApi(ApiConstant.registerUser, users);
-    alert("User Registered successfully!");
+
+    ServiceCall.postApi(UserApiConstant.registerUser, users);
     navigate("/login");
   };
   console.log(users);

@@ -70,7 +70,7 @@ const Login = () => {
     setTimeout(() => {
       if (lgn.login.loggedIn) {
         alert(StringConstant.successMessage);
-        navigate("/members");
+        navigate("/home");
       } else {
         console.log("*********" + lgn.errMsg);
         setErrRes(lgn.errMsg);

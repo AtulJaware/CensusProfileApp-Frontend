@@ -1,12 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ApiConstant } from "../../Constants/ApiConstant";
+import { MemberApiConstant } from "../../Constants/ApiConstant";
 import { ServiceCall } from "../../Services/ServiceMethod";
 const Members = () => {
   const [members, setMembers] = useState([]);
   useEffect(() => {
-    ServiceCall.getApi(ApiConstant.memeberApi)
+    ServiceCall.getApi(MemberApiConstant.memeberApi)
       .then((response) => {
         console.log(response);
         setMembers(response.data);
@@ -30,6 +30,7 @@ const Members = () => {
             <th>Marital Status</th>
             <th>Qualification</th>
             <th>Relationship</th>
+            <th>Address</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -45,6 +46,17 @@ const Members = () => {
               <td>{mem.qualification}</td>
               <td>{mem.relationShip}</td>
               <td>
+                {mem.address.d_no +
+                  " " +
+                  mem.address.street +
+                  " " +
+                  mem.address.city +
+                  " " +
+                  mem.address.state +
+                  " " +
+                  mem.address.pincode}
+              </td>
+              <td>
                 <Link to={`/member/update/${mem.memId}`}>
                   <i className="bi bi-pencil-square me-3" type="button"></i>
                 </Link>
@@ -54,9 +66,8 @@ const Members = () => {
                   onClick={() => {
                     if (window.confirm("Are you sure you want to delete")) {
                       ServiceCall.deleteApi(
-                        ApiConstant.deleteMember(mem.memId)
+                        MemberApiConstant.deleteMember(mem.memId)
                       );
-
                       alert(
                         "Member with Id " + mem.memId + " deleted successfully!"
                       );

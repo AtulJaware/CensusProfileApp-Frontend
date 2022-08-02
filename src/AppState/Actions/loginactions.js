@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Register
 export const registerAction = (users) => async (dispatch) => {
-  const result = await axios.post("http://localhost:9002/user/register", users);
+  const result = await axios.post("http://localhost:8081/user/register", users);
   console.log(result);
   console.log(result.data);
   dispatch({
@@ -14,7 +14,7 @@ export const registerAction = (users) => async (dispatch) => {
 // login action
 export const loginAction = (login) => (dispatch) => {
   axios
-    .post("http://localhost:9002/login/dto", login)
+    .post("http://localhost:8081/login/dto", login)
     .then((res) => {
       console.log(res);
       dispatch({
@@ -33,7 +33,7 @@ export const loginAction = (login) => (dispatch) => {
 
 // logout action
 export const logoutAction = (email) => async (dispatch) => {
-  const result = await axios.patch(`http://localhost:9002/logout/${email}`);
+  const result = await axios.patch(`http://localhost:8081/logout/${email}`);
   console.log(result);
   console.log(result.data);
   dispatch({

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { ServiceCall } from "../../Services/ServiceMethod";
+import { MemberApiConstant } from "../../Constants/ApiConstant";
 
 const UpdateMember = () => {
   const params = useParams();
@@ -17,14 +18,19 @@ const UpdateMember = () => {
     relationShip: "",
     qualification: "",
     marital_status: "",
+    id: "",
+    d_no: "",
+    street: "",
+    city: "",
+    state: "",
+    pincode: "",
   });
 
   //useEffect(callback function,[condition] )
   // get existing mem details using id and update mem state obj
   useEffect(() => {
-    axios
-      .get(`http://localhost:9002/member/${params.id}`)
-      .then((res) => setMem(res.data))
+    ServiceCall.getApi(MemberApiConstant.getMember(params.id))
+      .then((response) => setMem(response.data))
       .catch((err) => console.log(err));
   }, []);
 
@@ -46,14 +52,8 @@ const UpdateMember = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .put(`http://localhost:9002/member/update/${params.id}`, mem)
-      .then((res) => {
-        console.log(res);
-        alert("Member Updated with ID " + res.data.memId + " successfully!");
-        navigate("/members");
-      })
-      .catch((error) => console.log(error));
+    ServiceCall.putApi(MemberApiConstant.putMember(params.id), mem);
+    navigate("/members");
   };
   return (
     <div>
@@ -163,6 +163,72 @@ const UpdateMember = () => {
               id="marital_status"
               value={mem.marital_status}
               name="marital_status"
+              onChange={handleChange}
+            />
+          </div>
+          <div>Address</div>
+          <div className="mb-3">
+            <label htmlFor="d_no" className="form-label float-start">
+              Door no.
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="d_no"
+              value={mem.d_no}
+              name="d_no"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="street" className="form-label float-start">
+              Street Name
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="street"
+              value={mem.street}
+              name="street"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="city" className="form-label float-start">
+              City
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="city"
+              value={mem.city}
+              name="city"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="state" className="form-label float-start">
+              State
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="state"
+              value={mem.state}
+              name="state"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="pincode" className="form-label float-start">
+              Pincode
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="pincode"
+              value={mem.pincode}
+              name="pincode"
               onChange={handleChange}
             />
           </div>
