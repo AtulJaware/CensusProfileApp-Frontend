@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ServiceCall } from "../../Services/ServiceMethod";
+import { ApiConstant } from "../../Constants/ApiConstant";
 
 const AddMember = () => {
   const params = useParams();
@@ -37,14 +39,8 @@ const AddMember = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post(`http://localhost:9002/member/add`, mem)
-      .then((res) => {
-        console.log(res);
-        alert("Member Added with ID " + res.data.memId + " successfully!");
-        navigate("/members");
-      })
-      .catch((error) => console.log(error));
+    ServiceCall.postApi(ApiConstant.postMember, mem);
+    navigate("/members");
   };
   return (
     <div>

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ServiceCall } from "../../Services/ServiceMethod";
+import { ApiConstant } from "../../Constants/ApiConstant";
 
 const UpdateUser = () => {
   const params = useParams();
@@ -14,17 +16,16 @@ const UpdateUser = () => {
     lastName: "",
     dob: "",
     contactNo: "",
-    email: "",
-    password: "",
+    login: {
+      email: "",
+      password: "",
+    },
   });
 
   //useEffect(callback function,[condition] )
   // get existing user details using id and update user state obj
   useEffect(() => {
-    axios
-      .get(`http://localhost:9002/user/${params.id}`)
-      .then((res) => setUser(res.data))
-      .catch((err) => console.log(err));
+    ServiceCall.getApi(ApiConstant.getUser).then((res) => setUser(res.data));
   }, []);
 
   const handleChange = (event) => {
@@ -135,7 +136,7 @@ const UpdateUser = () => {
               className="form-control"
               id="email"
               aria-describedby="emailHelp"
-              value={user.email}
+              value={user.login.email}
               name="email"
               onChange={handleChange}
             />
@@ -148,7 +149,7 @@ const UpdateUser = () => {
               type="password"
               className="form-control"
               id="password"
-              value={user.password}
+              value={user.login.password}
               name="password"
               onChange={handleChange}
             />

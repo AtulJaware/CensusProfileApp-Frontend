@@ -33,6 +33,9 @@ export const ServiceCall = {
       axios
         .post(url, user)
         .then((response) => {
+          alert(
+            "Member Added with ID " + response.data.memId + " successfully!"
+          );
           resolve(response);
         })
         .catch((error) => reject(error));
