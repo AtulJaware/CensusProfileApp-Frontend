@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { UserServiceCall } from "../../Services/ServiceMethod";
 import { UserApiConstant } from "../../Constants/ApiConstant";
+import { StringConstant } from "../../Constants/StringConstant";
 class Users extends Component {
   state = {
     users: [],
@@ -18,17 +19,19 @@ class Users extends Component {
   // Delete user
   handleDelete = (id) => {
     // http://localhost:9002/user/{id}
-    UserServiceCall.deleteApi(UserApiConstant.deleteUser(id))
-      .then((response) => {
-        console.log(response);
-        // return all users except user which is selected for delete
-        const user = this.state.users.filter((user) => user.userId !== id);
+    if (window.confirm(StringConstant.deleteAlert)) {
+      UserServiceCall.deleteApi(UserApiConstant.deleteUser(id))
+        .then((response) => {
+          console.log(response);
+          // return all users except user which is selected for delete
+          const user = this.state.users.filter((user) => user.userId !== id);
 
-        // update state object with users
-        this.setState({ users: user });
-        alert("User with Id " + id + " deleted successfully!");
-      })
-      .catch((err) => console.log(err));
+          // update state object with users
+          this.setState({ users: user });
+          alert("User with Id " + id + " deleted successfully!");
+        })
+        .catch((err) => console.log(err));
+    }
   };
   render() {
     return (

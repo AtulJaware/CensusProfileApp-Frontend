@@ -24,6 +24,7 @@ export const loginAction = (login) => (dispatch) => {
     })
     .catch((error) => {
       console.log(error.response.data.message);
+      alert(error.response.data.message);
       dispatch({
         type: "ERR_RES",
         payload: error.response.data.message,

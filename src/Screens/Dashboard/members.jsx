@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MemberApiConstant } from "../../Constants/ApiConstant";
 import { ServiceCall } from "../../Services/ServiceMethod";
+import { StringConstant } from "../../Constants/StringConstant";
 const Members = () => {
   const [members, setMembers] = useState([]);
   useEffect(() => {
@@ -64,7 +65,7 @@ const Members = () => {
                   class="bi bi-trash3"
                   type="button"
                   onClick={() => {
-                    if (window.confirm("Are you sure you want to delete")) {
+                    if (window.confirm(StringConstant.deleteAlert)) {
                       ServiceCall.deleteApi(
                         MemberApiConstant.deleteMember(mem.memId)
                       );
