@@ -5,14 +5,11 @@ import Login from "../Screens/Auth/login";
 import Register from "../Screens/Auth/register";
 import Admins from "../Screens/Dashboard/admins";
 import NotFound from "../components/notfound";
-<<<<<<< HEAD
 import AddAdmin from "../Screens/Dashboard/addAdmin";
 import UpdateAdmin from "../Screens/Dashboard/updateAdmin";
-=======
 import AddMember from "../Screens/Dashboard/addMember";
 import AddUser from "../Screens/Dashboard/addUser";
 import UpdateMember from "../Screens/Dashboard/updateMember";
->>>>>>> 150aec48655fe0e4746c3109c575e318fb1f7c7e
 import UpdateUser from "../Screens/Dashboard/updateUser";
 import Users from "../Screens/Dashboard/users";
 import AdminRegister from "../Screens/Auth/adminRegister";
@@ -25,7 +22,7 @@ export const Nav = () => (
     <Routes>
       <Route path="/" element={<Home />} />
       
-      <Route path="/admins" element={<admins />} />
+      <Route path="/admins" element={<Admins />} />
       <Route path="/admin/add" element={<AddAdmin />} />
       <Route path="/admin/update/:id" element={<UpdateAdmin />} />
       <Route path={ScreenName().HOME} element={<Navigate to="/" replace />} />
