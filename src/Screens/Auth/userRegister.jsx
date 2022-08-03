@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ServiceCall } from "../../Services/RegisterServiceMethods";
 import { UserApiConstant } from "../../Constants/ApiConstant";
 import { registerAction } from "../../AppState/Actions/loginactions";
 import Joi from "joi-browser";
 
+
 const UserRegister = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [users, setUser] = useState({
     userId: "",

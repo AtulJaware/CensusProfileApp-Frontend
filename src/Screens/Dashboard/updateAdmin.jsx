@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AdminApiConstant } from "../../Constants/ApiConstant";
+import { AdminServiceCall } from "../../Services/ServiceMethod";
 
 const UpdateAdmin = () => {
   const params = useParams();
@@ -10,7 +12,7 @@ const UpdateAdmin = () => {
   // define state
   const [admin, setAdmin] = useState({
     
-    adminId: "1",
+    adminId: "",
     name: "",
     contact: "",
     email: "",
@@ -21,12 +23,8 @@ const UpdateAdmin = () => {
   //useEffect(callback function,[condition] )
   // get existing admin details using id and update admin state obj
   useEffect(() => {
-    axios
-      .get(`http://localhost:8081/admin/${params.id}`)
-      .then((res) => setAdmin(res.data))
-      .catch((err) => console.log(err));
+    AdminServiceCall.getApi(AdminApiConstant.getAdmin(params.adminId)).then((response)=>setAdmin(response.data))
   }, []);
-
   const handleChange = (event) => {
     console.log(event.target.name); // returns field name
     console.log(event.target.value); // retruns filed value
@@ -45,34 +43,13 @@ const UpdateAdmin = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .put(`http://localhost:8081/admin/update/${params.id}`, admin)
-      .then((res) => {
-        console.log(res);
-        alert("Admin Updated with ID " + res.data.adminId + " successfully!");
-        navigate("/admins");
-      })
-      .catch((error) => console.log(error));
+    AdminServiceCall.putApi(AdminApiConstant.putAdmin(params.adminId),admin);
   };
   return (
     <div>
       <div className="w-50 mx-auto mt-3">
         <p className="display-6">Update Admin</p>
         <form className="border p-3" onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="adminId" className="form-label float-start">
-              adminId
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="adminId"
-              value={admin.adminId}
-              name="adminId"
-              onChange={handleChange}
-              disabled
-            />
-          </div>
           <div className="mb-3">
             <label htmlFor="Name" className="form-label float-start">
               Name
@@ -122,20 +99,6 @@ const UpdateAdmin = () => {
               id="password"
               name="password"
               value={admin.password}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="mb-3">
-            <label htmlFor="role" className="form-label float-start">
-              role
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="role"
-              value={admin.role}
-              name="role"
               onChange={handleChange}
             />
           </div>

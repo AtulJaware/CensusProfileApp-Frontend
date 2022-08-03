@@ -44,6 +44,13 @@ const Bar = () => {
                 </NavLink>
               </li>
             )}
+            {login.loggedIn && login.role === USER_TYPE.ADMIN && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/admins">
+                  Admins
+                </NavLink>
+              </li>
+            )}
           </ul>
           <ul className="navbar-nav ms-auto">
             {login.loggedIn ? (

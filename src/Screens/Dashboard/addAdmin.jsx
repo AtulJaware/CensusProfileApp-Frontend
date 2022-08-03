@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AdminServiceCall } from "../../Services/ServiceMethod";
+import { AdminApiConstant } from "../../Constants/ApiConstant";
 
 const AddAdmin = () => {
   const params = useParams();
@@ -35,15 +37,11 @@ const AddAdmin = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post(`http://localhost:8081/adminDto/add`, admin)
-      .then((res) => {
-        console.log(res);
-        alert("admin Added with ID " + res.data.memId + " successfully!");
+        AdminServiceCall.postApi(AdminApiConstant.postAdmin,admin)
         navigate("/admins");
-      })
-      .catch((error) => console.log(error));
-  };
+      
+  }
+  
   return (
     <div>
       <div className="w-50 mx-auto mt-3">

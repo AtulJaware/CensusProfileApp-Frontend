@@ -1,12 +1,12 @@
 export const DOMAIN = "http://localhost:8081/";
 
-export const ApiConstant = {
-  adminApi: DOMAIN + "adminss",
-  postAdmin: DOMAIN + "adminDto/add",
-  deleteAdmin: (id) => DOMAIN + `admin/delete/${id}`,
-  getAdmin: DOMAIN + "admins",
-  getAdmin:(id)=> DOMAIN + `admin/${id}`,
-  putAdmin: (id) => DOMAIN + `admin/update/${id}`
+export const MemberApiConstant = {
+  memeberApi: DOMAIN + "members",
+  postMember: DOMAIN + "memberDto/add",
+  deleteMember: (id) => DOMAIN + `member/delete/${id}`,
+  getMember: DOMAIN + "members",
+  getMember:(id)=> DOMAIN + `member/${id}`,
+  putMember: (id) => DOMAIN + `member/update/${id}`
 };
 export const UserApiConstant ={
 registerUser: DOMAIN + "user/register",
@@ -19,6 +19,11 @@ putUser: (id) => DOMAIN + `user/${id}`,
 };
 
 export const AdminApiConstant ={
-getAdmin: (email) => DOMAIN + `admin/email/${email}`
-
+getAdmin: (email) => DOMAIN + `admin/email/${email}`,
+putAdmin: (adminId) => DOMAIN + `admin/update/${adminId}`,
+//getAdmin: (adminId) => DOMAIN + `admin/${adminId}`,
+getAdmins: DOMAIN + `admins`,
+deleteAdmin: (adminId) => DOMAIN +`admin/delete/${adminId}`,
+postAdmin: DOMAIN + "admin/add",
 };
+
