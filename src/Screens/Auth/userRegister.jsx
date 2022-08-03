@@ -22,7 +22,7 @@ const UserRegister = () => {
 
   const [errors, setErrors] = useState({});
   const [errRes, setErrRes] = useState("");
-
+//validation rules
   const schema = {
     firstName: Joi.string().alphanum().min(5).max(30).required(),
     lastName: Joi.string().alphanum().min(5).max(30).required(),
