@@ -14,6 +14,7 @@ import AdminRegister from "../Screens/Auth/adminRegister";
 import UserRegister from "../Screens/Auth/userRegister";
 import Logout from "../components/logout";
 import Profile from "../components/profile";
+import Register from "../Screens/Auth/register";
 
 export const Nav = () => (
     <div >
