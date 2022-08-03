@@ -1,7 +1,12 @@
-export const ScreenName =()=> {
-
-    return {
-
-        APPLICATION_SCREEN : "/application",
-    };
+export const ScreenName = () => {
+  return {
+    LOGIN_SCREEN: "/login",
+     HOME:"/home",
+     PROFILE:"/profile",
+     USERS:"/users",
+     MEMBERS:"/members",
+     REGISTER:"/register",
+     LOGOUT:"/logout",
+     APPLICATION_SCREEN : "/application",
+  };
 };

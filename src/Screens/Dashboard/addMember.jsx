@@ -95,28 +95,41 @@ const AddMember = () => {
             <label htmlFor="gender" className="form-label float-start">
               Gender
             </label>
-            <input
+            <select
               type="text"
               className="form-control"
+              aria-label="Default select example"
               id="gender"
               name="gender"
               value={mem.gender}
               onChange={handleChange}
-            />
+            >
+              <option value="">Choose Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
 
           <div className="mb-3">
             <label htmlFor="relationShip" className="form-label float-start">
               Relationship
             </label>
-            <input
+            <select
               type="text"
               className="form-control"
+              aria-label="Default select example"
               id="relationShip"
               value={mem.relationShip}
               name="relationShip"
               onChange={handleChange}
-            />
+            >
+              <option value="">choose Relation</option>
+              <option value="Father">Father</option>
+              <option value="Mother">Mother</option>
+              <option value="Daughter">Daughter</option>
+              <option value="Son">Son</option>
+            </select>
           </div>
           <div className="mb-3">
             <label htmlFor="qualification" className="form-label float-start">
@@ -135,14 +148,19 @@ const AddMember = () => {
             <label htmlFor="marital_status" className="form-label float-start">
               Marital Status
             </label>
-            <input
+            <select
               type="text"
               className="form-control"
               id="marital_status"
               value={mem.marital_status}
               name="marital_status"
               onChange={handleChange}
-            />
+            >
+              <option value="">Choose status</option>
+              <option value="Married">Married</option>
+              <option value="Unmarried">Unmarried</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
           <div>Address</div>
           <div className="mb-3">
