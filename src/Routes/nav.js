@@ -6,6 +6,7 @@ import Register from "../Screens/Auth/register";
 import Members from "../Screens/Dashboard/members";
 import NotFound from "../components/notfound";
 import AddMember from "../Screens/Dashboard/addMember";
+import AddUser from "../Screens/Dashboard/addUser";
 import UpdateMember from "../Screens/Dashboard/updateMember";
 import UpdateUser from "../Screens/Dashboard/updateUser";
 import Users from "../Screens/Dashboard/users";
@@ -26,6 +27,7 @@ export const Nav = () => (
       <Route path={ScreenName().LOGOUT} element={<Logout />} />
       <Route path={ScreenName().PROFILE} element={<Profile />} />
       <Route path="/member/add" element={<AddMember />} />
+      <Route path="/user/add" element={<AddUser />} />
       <Route path="/member/update/:id" element={<UpdateMember />} />
       <Route path="/user/update/:id" element={<UpdateUser />} />
       <Route path="/register/admin" element={<AdminRegister />} />

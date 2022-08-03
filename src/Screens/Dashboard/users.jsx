@@ -37,6 +37,9 @@ class Users extends Component {
     return (
       <div className="w-75 mx-auto">
         <h3 className="mt-4">User's Data</h3>
+        <Link to="/user/add" className="btn btn-primary float-end mb-2">
+        Add New User
+      </Link>
         <table className="table w-75 mx-auto border border-secondary rounded mt-4 p-2 shadow p-3 mb-5 bg-body rounded">
           <thead>
             <tr>
