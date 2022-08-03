@@ -85,7 +85,7 @@ const UserRegister = () => {
   };
   console.log(users);
   return (
-    <div className="w-25 mx-auto mt-4">
+    <div className="w-75 mx-auto mt-4">
       <h1>Register Page</h1>
       {errRes && <p className="alert alert-danger">{errRes}</p>}
       <form

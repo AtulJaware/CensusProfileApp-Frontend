@@ -15,10 +15,12 @@ import UserRegister from "../Screens/Auth/userRegister";
 import Logout from "../components/logout";
 import Profile from "../components/profile";
 import Register from "../Screens/Auth/register";
+import Home from "../Screens/Dashboard/home";
 
 export const Nav = () => (
     <div >
     <Routes>
+      <Route path="/" element={<Home />} />
       <Route path={ScreenName().HOME} element={<Navigate to="/" replace />} />
       <Route path={ScreenName().MEMBERS} element={<Members />} />
       <Route path={ScreenName().LOGIN_SCREEN} element={<Login />} />

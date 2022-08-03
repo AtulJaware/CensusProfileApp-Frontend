@@ -42,16 +42,6 @@ const UpdateApplication = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    /* axios
-      .put(`http://localhost:9001/application/update/${params.id}`, app)
-      .then((res) => {
-        console.log(res);
-        alert(
-          "Application Updated with ID " + res.data.appId + " successfully!"
-        );
-        navigate("/applications");
-      })
-      .catch((error) => console.log(error));*/
     ServiceCall.putApi(ApiConstant.putApi, app.id);
   };
   return (
