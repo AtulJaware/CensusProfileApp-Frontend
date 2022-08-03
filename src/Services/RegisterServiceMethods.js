@@ -6,10 +6,10 @@ export const REQUEST_METHODS = {
 };
 
 export const ServiceCall = {
-  postApi: (url, users) => {
+  postApi: (url, user) => {
     return new Promise(function (resolve, reject) {
       axios
-        .post(url, users)
+        .post(url, user)
         .then((response) => {
           alert("User Registered successfully!");
           resolve(response);

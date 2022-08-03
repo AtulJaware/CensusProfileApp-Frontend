@@ -4,7 +4,7 @@ import { ServiceCall } from "../../Services/ServiceMethod";
 import { MemberApiConstant } from "../../Constants/ApiConstant";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ServiceCall } from "../../Services/ServiceMethod";
+//import { ServiceCall } from "../../Services/ServiceMethod";
 import { ApiConstant } from "../../Constants/ApiConstant";
 
 const AddMember = () => {

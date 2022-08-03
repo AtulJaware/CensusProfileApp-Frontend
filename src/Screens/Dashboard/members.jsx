@@ -30,7 +30,7 @@ const Members = () => {
             <th>Marital Status</th>
             <th>Qualification</th>
             <th>Relationship</th>
-            <th>Address</th>
+            <th>FullAddress</th>
             <th>Actions</th>
           </tr>
         </thead>
