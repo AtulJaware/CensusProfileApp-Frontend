@@ -42,7 +42,7 @@ const UpdateApplication = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
+    /* axios
       .put(`http://localhost:9001/application/update/${params.id}`, app)
       .then((res) => {
         console.log(res);
@@ -51,7 +51,8 @@ const UpdateApplication = () => {
         );
         navigate("/applications");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error));*/
+    ServiceCall.putApi(ApiConstant.putApi, app.id);
   };
   return (
     <div>

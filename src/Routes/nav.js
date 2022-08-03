@@ -6,11 +6,8 @@ import NotFound from "../components/notfound";
 import UpdateApplication from "../Screens/Dashboard/updateapplication";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { ScreenName } from "./screenName";
-import Home from "../Screens/Dashboard/home";
 import Login from "../Screens/Auth/login";
-import Register from "../Screens/Auth/register";
 import Members from "../Screens/Dashboard/members";
-import NotFound from "../components/notfound";
 import AddMember from "../Screens/Dashboard/addMember";
 import UpdateMember from "../Screens/Dashboard/updateMember";
 import UpdateUser from "../Screens/Dashboard/updateUser";
@@ -29,7 +26,6 @@ export const Nav = () => (
       <Route path="/member/add" element={<AddMember />} />
       <Route path={ScreenName().LOGIN_SCREEN} element={<Login />} />
       <Route path="/logout" element={<Logout />} />
-      <Route path="/register" element={<Register />} />
       <Route path="/member/update/:id" element={<UpdateMember />} />
       <Route path="/users" element={<Users />} />
       <Route path="/user/update/:id" element={<UpdateUser />} />
