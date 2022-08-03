@@ -5,8 +5,14 @@ import Login from "../Screens/Auth/login";
 import Register from "../Screens/Auth/register";
 import Admins from "../Screens/Dashboard/admins";
 import NotFound from "../components/notfound";
+<<<<<<< HEAD
 import AddAdmin from "../Screens/Dashboard/addAdmin";
 import UpdateAdmin from "../Screens/Dashboard/updateAdmin";
+=======
+import AddMember from "../Screens/Dashboard/addMember";
+import AddUser from "../Screens/Dashboard/addUser";
+import UpdateMember from "../Screens/Dashboard/updateMember";
+>>>>>>> 150aec48655fe0e4746c3109c575e318fb1f7c7e
 import UpdateUser from "../Screens/Dashboard/updateUser";
 import Users from "../Screens/Dashboard/users";
 import AdminRegister from "../Screens/Auth/adminRegister";
@@ -18,18 +24,23 @@ export const Nav = () => (
   <div>
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/home" element={<Navigate to="/" replace />} />
+      
       <Route path="/admins" element={<admins />} />
       <Route path="/admin/add" element={<AddAdmin />} />
-      <Route path={ScreenName().LOGIN_SCREEN} element={<Login />} />
-      <Route path="/logout" element={<Logout />} />
-      <Route path="/register" element={<Register />} />
       <Route path="/admin/update/:id" element={<UpdateAdmin />} />
-      <Route path="/users" element={<Users />} />
+      <Route path={ScreenName().HOME} element={<Navigate to="/" replace />} />
+      <Route path={ScreenName().MEMBERS} element={<Members />} />
+      <Route path={ScreenName().LOGIN_SCREEN} element={<Login />} />
+      <Route path={ScreenName().REGISTER} element={<Register />} />
+      <Route path={ScreenName().USERS} element={<Users />} />
+      <Route path={ScreenName().LOGOUT} element={<Logout />} />
+      <Route path={ScreenName().PROFILE} element={<Profile />} />
+      <Route path="/member/add" element={<AddMember />} />
+      <Route path="/user/add" element={<AddUser />} />
+      <Route path="/member/update/:id" element={<UpdateMember />} />
       <Route path="/user/update/:id" element={<UpdateUser />} />
       <Route path="/register/admin" element={<AdminRegister />} />
       <Route path="/register/user" element={<UserRegister />} />
-      <Route path="/profile" element={<Profile />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   </div>

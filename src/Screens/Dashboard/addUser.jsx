@@ -1,98 +1,67 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React, { Component } from "react";
+import { useParams } from "react-router-dom";
 import { ServiceCall } from "../../Services/RegisterServiceMethods";
 import { UserApiConstant } from "../../Constants/ApiConstant";
-import { registerAction } from "../../AppState/Actions/loginactions";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Joi from "joi-browser";
 
-const UserRegister = () => {
-  const navigate = useNavigate();
-  const [users, setUser] = useState({
-    userId: "",
-    firstName: "",
-    lastName: "",
-    dob: "",
-    contactNo: "",
-    email: "",
-    password: "",
-    role: "User",
-  });
+const AddUser = () => {
   
-  const [errors, setErrors] = useState({});
-  const [errRes, setErrRes] = useState("");
+  //value,name,handleOnChange(),hanleSubmit
+    //react hook methods-useState() - define state of component
+    //useEffect - called at the time of page loading and when there is change in state
+    const params = useParams();
+    console.log(params);
 
-  const schema ={
-    firstName: Joi.string().alphanum().min(5).max(30).required(),
-    lastName: Joi.string().alphanum().min(5).max(30).required(),
-    contactNo: Joi.number().integer().min(10).required(),
-    dob: Joi.date().iso().required(),
-    email: Joi.string()
-      .email({
-        minDomainSegments: 2,
-        tlds: {allow: ["com","net"]},
-      })
-      .required(),
-    password: Joi.string().required(),
-  };
-
-  const validate = () => {
-    const errors = {}; //object type local variable
-    const result = Joi.validate(users, schema, {
-      abortEarly: false,
+    // Define state using useState
+     let navigate = useNavigate();
+     
+     const [user,setUser] = useState({
+        firstName: "",
+        lastName: "",
+        contactNo: "", 
+        dob:"",
+        email: "",
+        password: "",
+        role:"User",
     });
-    console.log(result);
-    // setting error messages to error properties
-    // ex: errors[username] = "username is required";
-   // ex: errors[password] = "password is required";
-    if (result.error != null)
-      for (let item of result.error.details) {
-        errors[item.path[0]] = item.message;
-      }
-    return Object.keys(errors).length === 0 ? null : errors;
-  };
+      
+    // define state
+    const handleChange = (event) => {
+        console.log(event.target.name); // returns field name
+        console.log(event.target.value); // retruns filed value
+    
+        // copy user details to newUser obj
+        const newUser = {...user};
 
-  const userl = useSelector((state) => state.login.users);
+        //update newEmp object
+        newUser[event.target.name] = event.target.value;
+    
+        // update emp obj with newEmp obj details
+        setUser(newUser);
 
-  const handleChange = (event) => {
-    const newUser = { ...users };
-    newUser[event.target.name] = event.target.value;
-    setUser(newUser);
-  };
+        
+      };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
-     // Call validate function
-    // validate login details with schema
-    setErrors(validate());
-
-    if (errors) return;
-
-    // dispatch login action to rest api
-    dispatch(registerAction(users));
-
-    setTimeout (() =>{
-      if(userl.users.loggedIn){
-        ServiceCall.postApi(UserApiConstant.registerUser, users);
-        navigate("/login");
-      }else{
-        console.log("*********" + userl.errMsg);
-        setErrRes(userl.errMsg);
-      }
-    }, 1000);
+    ServiceCall.postApi(UserApiConstant.postUser, user);
+    navigate("/users");
   };
-  console.log(users);
+  
+  
+  console.log(user);
   return (
-    <div className="w-25 mx-auto mt-4">
-      <h1>Register Page</h1>
-      {errRes && <p className="alert alert-danger">{errRes}</p>}
+    <div>
+      <h1>user page</h1>
+      <div>
         <form
           onSubmit={handleSubmit}
           className="w-50 mx-auto border border-secondary rounded mt-4 p-2 shadow-lg p-3 mb-5 bg-body rounded"
         >
           <p className="text-center fs-4 bg-secondary text-white">
-            User Register Form
+            Add New User
           </p>
           <div className="mb-3">
             <label htmlFor="firstName" className="form-label float-start">
@@ -102,7 +71,7 @@ const UserRegister = () => {
               type="text"
               className="form-control"
               id="firstName"
-              value={users.firstName}
+              value={user.firstName}
               name="firstName"
               onChange={handleChange}
             />
@@ -115,7 +84,7 @@ const UserRegister = () => {
               type="text"
               className="form-control"
               id="lastName"
-              value={users.lastName}
+              value={user.lastName}
               name="lastName"
               onChange={handleChange}
             />
@@ -128,7 +97,7 @@ const UserRegister = () => {
               type="date"
               className="form-control"
               id="dob"
-              value={users.dob}
+              value={user.dob}
               name="dob"
               onChange={handleChange}
             />
@@ -142,7 +111,7 @@ const UserRegister = () => {
               className="form-control"
               id="contactNo"
               name="contactNo"
-              value={users.contactNo}
+              value={user.contactNo}
               onChange={handleChange}
             />
           </div>
@@ -156,7 +125,7 @@ const UserRegister = () => {
               className="form-control"
               id="email"
               aria-describedby="emailHelp"
-              value={users.email}
+              value={user.email}
               name="email"
               onChange={handleChange}
             />
@@ -169,18 +138,19 @@ const UserRegister = () => {
               type="password"
               className="form-control"
               id="password"
-              value={users.password}
+              value={user.password}
               name="password"
               onChange={handleChange}
             />
           </div>
           <div className="d-grid gap-2">
             <button type="submit" className="btn btn-primary">
-              Register
+              Add
             </button>
           </div>
         </form>
       </div>
+    </div>
   );
 };
-export default UserRegister;
+export default AddUser;

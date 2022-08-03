@@ -10,6 +10,7 @@ export const ApiConstant = {
 };
 export const UserApiConstant ={
 registerUser: DOMAIN + "user/register",
+postUser: DOMAIN + "userDto/add",
 getUser: (id) => DOMAIN + `user/${id}`,
 getUsers: DOMAIN + `users`,
 getUserEmail: (email) => DOMAIN + `user/email/${email}`,
