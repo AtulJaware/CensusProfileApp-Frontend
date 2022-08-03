@@ -22,8 +22,8 @@ const UserRegister = () => {
   const [errRes, setErrRes] = useState("");
 
   const schema = {
-    firstName: Joi.string().alphanum().min(5).max(30).required(),
-    lastName: Joi.string().alphanum().min(5).max(30).required(),
+    firstName: Joi.string().alphanum().max(30).required(),
+    lastName: Joi.string().alphanum().max(30).required(),
     contactNo: Joi.number().integer().max(9999999999).required(),
     dob: Joi.date().iso().required(),
     userId: Joi.string().required(),
@@ -69,9 +69,14 @@ const UserRegister = () => {
     setErrors(validate());
 
     if (errors) return;
-    ServiceCall.postApi(UserApiConstant.registerUser, users);
-    navigate("/login");
-    setErrRes(userl.errMsg);
+    ServiceCall.postApi(UserApiConstant.registerUser, users)
+      .then(() => {
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error);
+        setErrRes(userl.errMsg);
+      });
   };
   console.log(users);
   return (

@@ -5,6 +5,7 @@ export const StringConstant = {
   deleteAlert: "Are you sure you want to delete",
   memberAdded: "Member Added successfully with ID ",
   memberUpdated: "Member Updated successfully with ID ",
+  memberDeleted: "Member deleted successfully with Id ",
   userAdded: "User Added successfully with ID ",
   userUpdated: "User Updated successfully with ID "
 };
