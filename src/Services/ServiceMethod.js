@@ -29,6 +29,7 @@ export const ServiceCall = {
   },
   postApi: (url, mem) => {
     return new Promise(function (resolve, reject) {
+
       axios
         .post(url, mem)
         .then((response) => {
@@ -61,6 +62,19 @@ export const UserServiceCall = {
         .catch((error) => reject(error));
     });
   },
+  postApi: (url, user) => {
+    return new Promise(function (resolve, reject) {
+
+      axios
+        .post(url, user)
+        .then((response) => {
+          alert("User Added with ID " + response.data.userId + " successfully!");
+          resolve(response);
+        })
+        .catch((error) => reject(error));
+    });
+  },
+
   putApi: (url, user) => {
     return new Promise(function (resolve, reject) {
       axios
