@@ -6,6 +6,7 @@ export const ScreenName = () => {
      USERS:"/users",
      MEMBERS:"/members",
      REGISTER:"/register",
-     LOGOUT:"/logout"
+     LOGOUT:"/logout",
+     APPLICATION_SCREEN : "/application",
   };
 };

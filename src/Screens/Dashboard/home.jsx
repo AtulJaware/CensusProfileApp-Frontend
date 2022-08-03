@@ -1,13 +1,14 @@
+//class component
 import React, { Component } from "react";
 
 class Home extends Component {
   state = {
-    count: 0,
+   count: 0,
   };
   render() {
     return (
       <div>
-        <h1>Home page</h1>
+        <h2>Home page</h2>
       </div>
     );
   }

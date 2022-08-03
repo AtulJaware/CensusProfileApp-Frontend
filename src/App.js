@@ -1,15 +1,17 @@
+//import logo from './logo.svg';
 import "./App.css";
-import Bar from "../src/components/bar";
-
 import { Nav } from "../src/Routes/nav";
+import Bar  from "./components/bar";
 
-function App() {
-  return (
-    <div className="App">
-      <Bar />
-      <Nav />
-    </div>
-  );
+ function App() {
+ return (
+ <div className="App">
+ <Bar />
+ <Nav/>
+ </div>
+ );
 }
 
 export default App;
+
+

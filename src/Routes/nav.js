@@ -1,10 +1,11 @@
+import Application from "../components/application";
+import NotFound from "../components/notfound";
+import UpdateApplication from "../Screens/Dashboard/updateapplication";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { ScreenName } from "./screenName";
-import Home from "../Screens/Dashboard/home";
 import Login from "../Screens/Auth/login";
 import Register from "../Screens/Auth/register";
 import Admins from "../Screens/Dashboard/admins";
-import NotFound from "../components/notfound";
 import AddAdmin from "../Screens/Dashboard/addAdmin";
 import UpdateAdmin from "../Screens/Dashboard/updateAdmin";
 import Members from "../Screens/Dashboard/members";
@@ -17,12 +18,12 @@ import UserRegister from "../Screens/Auth/userRegister";
 import Logout from "../components/logout";
 import Profile from "../components/profile";
 import UpdateMember from "../Screens/Dashboard/updateMember";
+import Home from "../Screens/Dashboard/home";
 
 export const Nav = () => (
-  <div>
+    <div >
     <Routes>
       <Route path="/" element={<Home />} />
-      
       <Route path="/admins" element={<Admins />} />
       <Route path="/admin/add" element={<AddAdmin />} />
       <Route path="/admin/update/:id" element={<UpdateAdmin />} />
@@ -40,9 +41,12 @@ export const Nav = () => (
       <Route path="/register/admin" element={<AdminRegister />} />
       <Route path="/register/user" element={<UserRegister />} />
       <Route path="*" element={<NotFound />} />
+     <Route path={ScreenName().APPLICATION_SCREEN} element={<Application />} />
+     <Route path="/application/update/:id" element={<UpdateApplication />} />
     </Routes>
-  </div>
+    </div>
 );
-export const navigate = (screenname, params) => {
-  this.props.navigate(screenname, params);
+
+export const navigate=(screenname,params)=>{
+    this.props.navigate(screenname, params);
 };
