@@ -1,56 +1,51 @@
-import React, { Component } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { ServiceCall } from "../../Services/RegisterServiceMethods";
 import { UserApiConstant } from "../../Constants/ApiConstant";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Joi from "joi-browser";
 
 const AddUser = () => {
-  
   //value,name,handleOnChange(),hanleSubmit
-    //react hook methods-useState() - define state of component
-    //useEffect - called at the time of page loading and when there is change in state
-    const params = useParams();
-    console.log(params);
+  //react hook methods-useState() - define state of component
+  //useEffect - called at the time of page loading and when there is change in state
+  const params = useParams();
+  console.log(params);
 
-    // Define state using useState
-     let navigate = useNavigate();
-     
-     const [user,setUser] = useState({
-        firstName: "",
-        lastName: "",
-        contactNo: "", 
-        dob:"",
-        email: "",
-        password: "",
-        role:"User",
-    });
-      
-    // define state
-    const handleChange = (event) => {
-        console.log(event.target.name); // returns field name
-        console.log(event.target.value); // retruns filed value
-    
-        // copy user details to newUser obj
-        const newUser = {...user};
+  // Define state using useState
+  let navigate = useNavigate();
 
-        //update newEmp object
-        newUser[event.target.name] = event.target.value;
-    
-        // update emp obj with newEmp obj details
-        setUser(newUser);
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    contactNo: "",
+    dob: "",
+    email: "",
+    password: "",
+    role: "User",
+  });
 
-        
-      };
+  // define state
+  const handleChange = (event) => {
+    console.log(event.target.name); // returns field name
+    console.log(event.target.value); // retruns filed value
+
+    // copy user details to newUser obj
+    const newUser = { ...user };
+
+    //update newEmp object
+    newUser[event.target.name] = event.target.value;
+
+    // update emp obj with newEmp obj details
+    setUser(newUser);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     ServiceCall.postApi(UserApiConstant.postUser, user);
     navigate("/users");
   };
-  
-  
+
   console.log(user);
   return (
     <div>

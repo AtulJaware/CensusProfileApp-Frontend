@@ -1,4 +1,5 @@
 import axios from "axios";
+import { StringConstant } from "../Constants/StringConstant";
 export const REQUEST_METHODS = {
   POST: "POST",
   DELETE: "DELETE",
@@ -33,7 +34,7 @@ export const ServiceCall = {
       axios
         .post(url, mem)
         .then((response) => {
-          alert("Member Added with ID " + response.data.memId + " successfully!");
+          alert(StringConstant.memberAdded + response.data.memId);
           resolve(response);
         })
         .catch((error) => reject(error));
@@ -45,7 +46,7 @@ export const ServiceCall = {
       .put(url, mem)
       .then((response) => {
         resolve(response);
-        alert("Member Updated with ID " + response.data.memId + " successfully!");
+        alert(StringConstant.memberUpdated + response.data.memId);
       })
       .catch((error) => reject(error));
   });
@@ -68,7 +69,7 @@ export const UserServiceCall = {
       axios
         .post(url, user)
         .then((response) => {
-          alert("User Added with ID " + response.data.userId + " successfully!");
+          alert(StringConstant.userAdded + response.data.userId);
           resolve(response);
         })
         .catch((error) => reject(error));
@@ -82,7 +83,7 @@ export const UserServiceCall = {
         .then((response) => {
           resolve(response);
           console.log(response);
-        alert("User Updated with ID " + response.data.userId + " successfully!");
+        alert(StringConstant.userUpdated + response.data.userId);
         })
         .catch((error) => reject(error));
     });

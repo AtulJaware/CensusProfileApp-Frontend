@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ServiceCall } from "../../Services/RegisterServiceMethods";
 import { UserApiConstant } from "../../Constants/ApiConstant";
-import { registerAction } from "../../AppState/actions/loginactions";
-import Joi from "joi-browser";
+import { registerAction } from "../../AppState/Actions/loginactions";
 import { dispatch } from "react";
+import Joi from "joi-browser";
 
 const UserRegister = () => {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const UserRegister = () => {
   const schema = {
     firstName: Joi.string().alphanum().min(5).max(30).required(),
     lastName: Joi.string().alphanum().min(5).max(30).required(),
-    contactNo: Joi.number().integer().min(10).required(),
+    contactNo: Joi.number().integer().max(10).required(),
     dob: Joi.date().iso().required(),
     email: Joi.string()
       .email({
@@ -107,6 +107,7 @@ const UserRegister = () => {
             name="firstName"
             onChange={handleChange}
           />
+          {errors && <small className="text-danger">{errors.firstName}</small>}
         </div>
         <div className="mb-3">
           <label htmlFor="lastName" className="form-label float-start">
@@ -120,6 +121,7 @@ const UserRegister = () => {
             name="lastName"
             onChange={handleChange}
           />
+          {errors && <small className="text-danger">{errors.lastName}</small>}
         </div>
         <div className="mb-3">
           <label htmlFor="dob" className="form-label float-start">
@@ -133,6 +135,7 @@ const UserRegister = () => {
             name="dob"
             onChange={handleChange}
           />
+          {errors && <small className="text-danger">{errors.dob}</small>}
         </div>
         <div className="mb-3">
           <label htmlFor="contactNo" className="form-label float-start">
@@ -146,6 +149,7 @@ const UserRegister = () => {
             value={users.contactNo}
             onChange={handleChange}
           />
+          {errors && <small className="text-danger">{errors.contactNo}</small>}
         </div>
 
         <div className="mb-3">
@@ -161,6 +165,7 @@ const UserRegister = () => {
             name="email"
             onChange={handleChange}
           />
+          {errors && <small className="text-danger">{errors.email}</small>}
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label float-start">
@@ -174,6 +179,7 @@ const UserRegister = () => {
             name="password"
             onChange={handleChange}
           />
+          {errors && <small className="text-danger">{errors.password}</small>}
         </div>
         <div className="d-grid gap-2">
           <button type="submit" className="btn btn-primary">
