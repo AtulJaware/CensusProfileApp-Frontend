@@ -1,12 +1,12 @@
 export const DOMAIN = "http://localhost:8081/";
 
-export const MemberApiConstant = {
-  memeberApi: DOMAIN + "members",
-  postMember: DOMAIN + "memberDto/add",
-  deleteMember: (id) => DOMAIN + `member/delete/${id}`,
-  getMember: DOMAIN + "members",
-  getMember:(id)=> DOMAIN + `member/${id}`,
-  putMember: (id) => DOMAIN + `member/update/${id}`
+export const ApiConstant = {
+  adminApi: DOMAIN + "adminss",
+  postAdmin: DOMAIN + "adminDto/add",
+  deleteAdmin: (id) => DOMAIN + `admin/delete/${id}`,
+  getAdmin: DOMAIN + "admins",
+  getAdmin:(id)=> DOMAIN + `admin/${id}`,
+  putAdmin: (id) => DOMAIN + `admin/update/${id}`
 };
 export const UserApiConstant ={
 registerUser: DOMAIN + "user/register",

@@ -1,0 +1,149 @@
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+
+const UpdateAdmin = () => {
+  const params = useParams();
+  let navigate = useNavigate();
+  console.log(params);
+
+  // define state
+  const [admin, setAdmin] = useState({
+    
+    adminId: "1",
+    name: "",
+    contact: "",
+    email: "",
+    password: "",
+    role: "Admin",
+  });
+
+  //useEffect(callback function,[condition] )
+  // get existing admin details using id and update admin state obj
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8081/admin/${params.id}`)
+      .then((res) => setAdmin(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  const handleChange = (event) => {
+    console.log(event.target.name); // returns field name
+    console.log(event.target.value); // retruns filed value
+
+    // copy admin details to newadmin obj
+    const newAdmin = { ...admin };
+
+    //newAdmin.id =10;
+    //newAdmin["id"] = 10;
+    //update newAdmin object
+    newAdmin[event.target.name] = event.target.value;
+
+    // update admin obj with newAdmin obj details
+    setAdmin(newAdmin);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    axios
+      .put(`http://localhost:8081/admin/update/${params.id}`, admin)
+      .then((res) => {
+        console.log(res);
+        alert("Admin Updated with ID " + res.data.adminId + " successfully!");
+        navigate("/admins");
+      })
+      .catch((error) => console.log(error));
+  };
+  return (
+    <div>
+      <div className="w-50 mx-auto mt-3">
+        <p className="display-6">Update Admin</p>
+        <form className="border p-3" onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="adminId" className="form-label float-start">
+              adminId
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="adminId"
+              value={admin.adminId}
+              name="adminId"
+              onChange={handleChange}
+              disabled
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="Name" className="form-label float-start">
+              Name
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="Name"
+              value={admin.Name}
+              name="Name"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="contact" className="form-label float-start">
+              Contact
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              id="contact"
+              value={admin.contact}
+              name="contact"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label float-start">
+              email
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="email"
+              value={admin.email}
+              name="email"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label float-start">
+              password
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="password"
+              name="password"
+              value={admin.password}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="role" className="form-label float-start">
+              role
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="role"
+              value={admin.role}
+              name="role"
+              onChange={handleChange}
+            />
+          </div>
+          </form>
+          </div>
+          </div>
+
+  );
+};
+
+export default UpdateAdmin;

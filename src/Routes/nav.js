@@ -3,10 +3,10 @@ import { ScreenName } from "./screenName";
 import Home from "../Screens/Dashboard/home";
 import Login from "../Screens/Auth/login";
 import Register from "../Screens/Auth/register";
-import Members from "../Screens/Dashboard/members";
+import Admins from "../Screens/Dashboard/admins";
 import NotFound from "../components/notfound";
-import AddMember from "../Screens/Dashboard/addMember";
-import UpdateMember from "../Screens/Dashboard/updateMember";
+import AddAdmin from "../Screens/Dashboard/addAdmin";
+import UpdateAdmin from "../Screens/Dashboard/updateAdmin";
 import UpdateUser from "../Screens/Dashboard/updateUser";
 import Users from "../Screens/Dashboard/users";
 import AdminRegister from "../Screens/Auth/adminRegister";
@@ -19,12 +19,12 @@ export const Nav = () => (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/home" element={<Navigate to="/" replace />} />
-      <Route path="/members" element={<Members />} />
-      <Route path="/member/add" element={<AddMember />} />
+      <Route path="/admins" element={<admins />} />
+      <Route path="/admin/add" element={<AddAdmin />} />
       <Route path={ScreenName().LOGIN_SCREEN} element={<Login />} />
       <Route path="/logout" element={<Logout />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/member/update/:id" element={<UpdateMember />} />
+      <Route path="/admin/update/:id" element={<UpdateAdmin />} />
       <Route path="/users" element={<Users />} />
       <Route path="/user/update/:id" element={<UpdateUser />} />
       <Route path="/register/admin" element={<AdminRegister />} />
