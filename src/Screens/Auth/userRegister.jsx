@@ -6,7 +6,6 @@ import { UserApiConstant } from "../../Constants/ApiConstant";
 import { registerAction } from "../../AppState/Actions/loginactions";
 import { dispatch } from "react";
 import Joi from "joi-browser";
-import { dispatch } from "react";
 
 const UserRegister = () => {
   const navigate = useNavigate();

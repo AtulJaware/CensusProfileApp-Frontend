@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { ServiceCall } from "../../Services/applicationServiceMethod";
 import { ApiConstant } from "../../Constants/ApiConstant";
-import axios from "axios";
 
 const UpdateApplication = () => {
   const params = useParams();
