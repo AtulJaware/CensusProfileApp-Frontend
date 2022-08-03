@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutAction } from "../AppState/Actions/loginactions";
+import { logoutAction } from "../AppState/actions/loginactions";
 
 const Logout = () => {
   const dispatch = useDispatch();
