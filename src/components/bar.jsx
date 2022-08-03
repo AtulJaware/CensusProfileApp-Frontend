@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ScreenName } from "../Routes/screenName";
 import { AppConstant } from "../Constants/AppConstant";
 import { USER_TYPE } from "../Constants/StringConstant";
+
 const Bar = () => {
   const login = useSelector((state) => state.login.login);
   return (
@@ -44,7 +45,16 @@ const Bar = () => {
                 </NavLink>
               </li>
             )}
+
+            {login.loggedIn && login.role === USER_TYPE.ADMIN && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/application">
+                  Applications
+                </NavLink>
+              </li>
+            )}
           </ul>
+
           <ul className="navbar-nav ms-auto">
             {login.loggedIn ? (
               <li className="nav-item">

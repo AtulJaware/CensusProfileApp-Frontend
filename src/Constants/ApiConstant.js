@@ -1,5 +1,12 @@
 export const DOMAIN = "http://localhost:8081/";
 
+
+export const ApiConstant =  {
+    applicationApi:DOMAIN+"application",
+    putApi:(id)=>DOMAIN+`application/update/${id}`,
+    getApi: DOMAIN+"application",
+}
+
 export const MemberApiConstant = {
   memeberApi: DOMAIN + "members",
   postMember: DOMAIN + "memberDto/add",
