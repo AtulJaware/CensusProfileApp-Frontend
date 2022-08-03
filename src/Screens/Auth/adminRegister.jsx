@@ -1,8 +1,12 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-import { useState } from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { ServiceCall } from "../../Services/RegisterServiceMethods";
+import { AdminApiConstant } from "../../Constants/ApiConstant";
+import { registerAction } from "../../AppState/Actions/loginactions";
+import { dispatch } from "react";
+import Joi from "joi-browser";
+import { useParams } from "react-router-dom";
 
 const AdminRegister = () => {
   const params = useParams();
@@ -20,6 +24,53 @@ const AdminRegister = () => {
     password: "",
     role: "Admin",
   });
+
+  const [errors, setErrors] = useState({});
+  const [errRes, setErrRes] = useState("");
+
+ const schema = {
+    name: Joi.string().alphanum().min(5).max(30).required(),
+    contact: Joi.number().integer().max(10).required(),
+    email: Joi.string()
+      .email({
+        minDomainSegments: 2,
+        tlds: { allow: ["com", "net"] },
+      })
+      .required(),
+    password: Joi.string().required(),
+  };
+
+const validate = () => {
+
+    const errors = {}; //object type local variable
+
+    const result = Joi.validate(admin, schema, {
+
+      abortEarly: false,
+
+    });
+
+    console.log(result);
+
+    // setting error messages to error properties
+
+    // ex: errors[username] = "username is required";
+
+    // ex: errors[password] = "password is required";
+
+    if (result.error != null)
+
+      for (let item of result.error.details) {
+
+        errors[item.path[0]] = item.message;
+
+      }
+
+    return Object.keys(errors).length === 0 ? null : errors;
+
+  };
+
+const adminl = useSelector((state) => state.login.admin);
   const handleChange = (event) => {
     console.log(event.target.name); // returns field name
     console.log(event.target.value); // retruns filed value
@@ -35,22 +86,35 @@ const AdminRegister = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios
-      .post(`http://localhost:8081/admin/register`, admin)
-      .then((res) => {
-        console.log(res);
-        alert(
-          "Admin Registered with Admin ID " +
-            res.data.adminId +
-            " successfully!"
-        );
-        navigate("/login");
-      })
-      .catch((error) => console.log(error));
+   
+// Call validate function
+    // validate login details with schema
+    setErrors(validate());
+
+    if (errors) return;
+
+    // dispatch login action to rest api
+    dispatch(registerAction(admin));
+
+    setTimeout(() => {
+      if (adminl.admin.loggedIn) {
+        ServiceCall.postApi(AdminApiConstant.registerAdmin, admin);
+        navigate("/login");
+      } else {
+        console.log("*********" + adminl.errMsg);
+        setErrRes(adminl.errMsg);
+      }
+    }, 1000);
+
+
   };
+
+console.log(admin);
+
   return (
     <div className="w-50 mx-auto mt-3">
-      <p className="display-6">Admin Registration</p>
+      <h1>Admin Register Page</h1>
+      {errRes && <p className="alert alert-danger">{errRes}</p>}
       <form className="border p-3" onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label float-start">
@@ -64,6 +128,7 @@ const AdminRegister = () => {
             name="name"
             onChange={handleChange}
           />
+          {errors && <small className="text-danger">{errors.name}</small>}
         </div>
         <div className="mb-3">
           <label htmlFor="contact" className="form-label float-start">
@@ -77,6 +142,7 @@ const AdminRegister = () => {
             value={admin.contact}
             onChange={handleChange}
           />
+          {errors && <small className="text-danger">{errors.contact}</small>}
         </div>
 
         <div className="mb-3">
@@ -92,6 +158,7 @@ const AdminRegister = () => {
             name="email"
             onChange={handleChange}
           />
+          {errors && <small className="text-danger">{errors.email}</small>}
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label float-start">
@@ -105,6 +172,7 @@ const AdminRegister = () => {
             name="password"
             onChange={handleChange}
           />
+           {errors && <small className="text-danger">{errors.password}</small>}
         </div>
         <select
           className="form-select mb-3"

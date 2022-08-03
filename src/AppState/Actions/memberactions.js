@@ -1,9 +1,9 @@
 import axios from "axios";
 
 handleDelete = (id) => {
-    // http://localhost:8081/member/delete/{id}
+    // http://localhost:8001/member/delete/{id}
     axios
-      .delete(`http://localhost:8081/member/delete/${id}`)
+      .delete(`http://localhost:8001/member/delete/${id}`)
       .then((res) => {
         console.log(res);
         // return all members except mem which is selected for delete
