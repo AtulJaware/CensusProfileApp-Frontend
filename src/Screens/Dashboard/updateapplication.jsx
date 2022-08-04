@@ -40,7 +40,7 @@ const UpdateApplication = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    ServiceCall.putApi(ApiConstant.putApi, app.id);
+    ServiceCall.putApi(ApiConstant.putApi(params.id));
   };
   return (
     <div>
