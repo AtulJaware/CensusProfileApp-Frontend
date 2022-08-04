@@ -17,6 +17,7 @@ const Members = () => {
       })
       .catch((error) => console.log(error));
   }, []);
+  
 
   return (
     <div className="w-75 mx-auto">
