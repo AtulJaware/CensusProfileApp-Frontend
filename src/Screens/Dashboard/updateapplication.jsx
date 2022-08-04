@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ServiceCall } from "../../Services/applicationServiceMethod";
 import { ApiConstant } from "../../Constants/ApiConstant";
+import { StringConstant } from "../../Constants/StringConstant";
 
 const UpdateApplication = () => {
   const params = useParams();
+  let navigate = useNavigate();
   console.log(params);
 
   // define state
@@ -40,7 +42,14 @@ const UpdateApplication = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    ServiceCall.putApi(ApiConstant.putApi, app.id);
+    ServiceCall.putApi(ApiConstant.putApi(params.id), app)
+      .then(() => {
+        navigate("/application");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    alert(StringConstant.updateAppMessage);
   };
   return (
     <div>
