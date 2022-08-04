@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { logoutAction } from "../AppState/Actions/loginactions";
+import { useSelector } from "react-redux";
+import { LoginServiceCall } from "../Services/ServiceMethod";
+import { LoginApiConstant } from "../Constants/ApiConstant";
 
 const Logout = () => {
-  const dispatch = useDispatch();
   const login = useSelector((state) => state.login.login);
   console.log(login.email);
   useEffect(() => {
-    dispatch(logoutAction(login.email));
+    LoginServiceCall.patchApi(LoginApiConstant.patchLogin(login.email));
   }, []);
   return (
     <div>
