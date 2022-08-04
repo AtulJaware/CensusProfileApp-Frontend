@@ -52,8 +52,13 @@ const UpdateMember = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    ServiceCall.putApi(MemberApiConstant.putMember(params.id), mem);
-    navigate("/members");
+    ServiceCall.putApi(MemberApiConstant.putMember(params.id), mem)
+      .then(() => {
+        navigate("/members");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div>

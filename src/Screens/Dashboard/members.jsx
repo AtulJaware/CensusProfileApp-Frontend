@@ -1,10 +1,14 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MemberApiConstant } from "../../Constants/ApiConstant";
 import { ServiceCall } from "../../Services/ServiceMethod";
+import { StringConstant } from "../../Constants/StringConstant";
+
 const Members = () => {
+  let navigate = useNavigate();
   const [members, setMembers] = useState([]);
+
   useEffect(() => {
     ServiceCall.getApi(MemberApiConstant.memeberApi)
       .then((response) => {
@@ -13,6 +17,7 @@ const Members = () => {
       })
       .catch((error) => console.log(error));
   }, []);
+
   return (
     <div className="w-75 mx-auto">
       <h3 className="mt-4">Member's Data</h3>
@@ -64,13 +69,17 @@ const Members = () => {
                   class="bi bi-trash3"
                   type="button"
                   onClick={() => {
-                    if (window.confirm("Are you sure you want to delete")) {
+                    if (window.confirm(StringConstant.deleteAlert)) {
                       ServiceCall.deleteApi(
                         MemberApiConstant.deleteMember(mem.memId)
-                      );
-                      alert(
-                        "Member with Id " + mem.memId + " deleted successfully!"
-                      );
+                      )
+                        .then(() => {
+                          alert(StringConstant.memberDeleted + mem.memId);
+                          navigate("/member/add");
+                        })
+                        .catch((error) => {
+                          console.log(error);
+                        });
                     }
                   }}
                 ></i>

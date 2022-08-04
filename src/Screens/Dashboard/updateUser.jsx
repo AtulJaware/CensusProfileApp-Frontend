@@ -47,8 +47,13 @@ const UpdateUser = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    UserServiceCall.putApi(UserApiConstant.putUser(params.id), user);
-    navigate("/users");
+    UserServiceCall.putApi(UserApiConstant.putUser(params.id), user)
+      .then(() => {
+        navigate("/users");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div>
