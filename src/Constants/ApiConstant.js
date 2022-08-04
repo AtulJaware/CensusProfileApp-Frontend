@@ -16,11 +16,12 @@ export const MemberApiConstant = {
 };
 export const UserApiConstant = {
   registerUser: DOMAIN + "user/register",
+  userApi: DOMAIN + "users",
   postUser: DOMAIN + "userDto/add",
-  getUser: (id) => DOMAIN + `user/${id}`,
-  getUsers: DOMAIN + `users`,
-  getUserEmail: (email) => DOMAIN + `user/email/${email}`,
   deleteUser: (id) => DOMAIN + `user/delete/${id}`,
+  getUser: DOMAIN + `users`,
+  getUser: (id) => DOMAIN + `user/${id}`,
+  getUserEmail: (email) => DOMAIN + `user/email/${email}`,
   putUser: (id) => DOMAIN + `user/update/${id}`,
 };
 
