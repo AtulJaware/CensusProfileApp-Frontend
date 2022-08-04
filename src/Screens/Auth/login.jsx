@@ -20,8 +20,8 @@ const Login = () => {
   // Define schema to validate email and password
   const schema = {
     email: Joi.string()
-    .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
-    .required(),
+      .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
+      .required(),
     password: Joi.string().min(5).max(30).required(),
     role: Joi.string().required(),
   };
@@ -64,18 +64,23 @@ const Login = () => {
     if (errors) return;
 
     // dispatch login action to rest api
-    dispatch(loginAction(login));
+    dispatch(
+      loginAction(login, (status) => {
+        if (status) {
+          setTimeout(() => {
+            if (lgn.login.loggedIn) {
+              alert(StringConstant.successMessage);
+              navigate("/home");
+            } else {
+              console.log("*********" + lgn.errMsg);
+              setErrRes(lgn.errMsg);
+            }
+          }, 1000);
+        }
+      })
+    );
 
     // Based on loggedIn state redirect user to home or any other page
-    setTimeout(() => {
-      if (lgn.login.loggedIn) {
-        alert(StringConstant.successMessage);
-        navigate("/home");
-      } else {
-        console.log("*********" + lgn.errMsg);
-        setErrRes(lgn.errMsg);
-      }
-    }, 1000);
   };
   console.log(login);
 

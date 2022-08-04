@@ -3,11 +3,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ServiceCall } from "../../Services/RegisterServiceMethods";
 import { AdminApiConstant } from "../../Constants/ApiConstant";
-import { registerAction } from "../../AppState/actions/loginactions";
 import { dispatch } from "react";
 import Joi from "joi-browser";
-import { useParams } from "react-router-dom";
-
 const AdminRegister = () => {
   const params = useParams();
   console.log(params);
@@ -29,8 +26,8 @@ const AdminRegister = () => {
   const [errRes, setErrRes] = useState("");
 
   const schema = {
-    adminId: Joi.integer().required(),
-    name: Joi.string().alphanum().max(30).required(),
+    adminId: Joi.string().required(),
+    name: Joi.string().alphanum().min(5).max(30).required(),
     contact: Joi.number().integer().min(10).required(),
     email: Joi.string()
       .email({

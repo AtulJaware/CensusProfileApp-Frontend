@@ -7,11 +7,17 @@ export const StringConstant = {
   memberDeleted: "Member deleted successfully with Id ",
   userAdded: "User Added successfully with ID ",
   userUpdated: "User Updated successfully with ID ",
-  loginAdded: "login added successfully with EMAIL",
-  loginUpdated: "login updated successfully with EMAIL",
+  loginMsg: "login successfully with email  ",
+  logoutMsg: "logout successfully with email  ",
 };
 export const USER_TYPE= {
 ADMIN:"Admin",
 USER:"User"
+}
+export const NOT_FOUND={
+  DOB: "Member Not Found with Date of Birth  ",
+  FIRST: "Member Not Found with First Name  ",
+  LAST: "Member Not Found with Last Name  ",
+  ID: "Member Not Found with Member ID  "
 }
 
