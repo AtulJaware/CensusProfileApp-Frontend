@@ -46,9 +46,7 @@ class Admins extends Component {
               <th>Admin Id</th>
               <th>Name</th>
               <th>Contact</th>
-              <th>Email</th>
-              <th>Password</th>
-              <th>Actions</th>
+              <th>Actions</th> 
             </tr>
           </thead>
           <tbody>
@@ -57,8 +55,6 @@ class Admins extends Component {
                 <td>{admin.adminId}</td>
                 <td>{admin.name}</td>
                 <td>{admin.contact}</td>
-                <td>{admin.email}</td>
-                <td>{admin.password}</td>
                 <td>
                   <Link to={`/admin/update/${admin.adminId}`}>
                     <i className="bi bi-pencil-square me-3" type="button"></i>

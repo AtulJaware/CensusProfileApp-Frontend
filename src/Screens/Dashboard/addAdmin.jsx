@@ -26,19 +26,22 @@ const AddAdmin = () => {
     console.log(event.target.name); // returns field name
     console.log(event.target.value); // retruns filed value
 
-    // copy mem details to newMem obj
+    // copy admin details to newAdmin obj
     const newAdmin = { ...admin };
 
     newAdmin[event.target.name] = event.target.value;
 
-    // update mem obj with newMem obj details
+    // update admin obj with newAdmin obj details
     setAdmin(newAdmin);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-        AdminServiceCall.postApi(AdminApiConstant.postAdmin,admin)
-        navigate("/admins");
+       // AdminServiceCall.postApi(AdminApiConstant.postAdmin,admin)
+        //navigate("/admins");
+        AdminServiceCall.postApi(AdminApiConstant.postAdmin,admin).then (()=>{
+navigate("/admins");
+}).catch(error=>{console.log("Error")})
       
   }
   
