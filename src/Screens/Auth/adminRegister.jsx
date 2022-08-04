@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ServiceCall } from "../../Services/RegisterServiceMethods";
 import { AdminApiConstant } from "../../Constants/ApiConstant";
-import { registerAction } from "../../AppState/Actions/loginactions";
+import { registerAction } from "../../AppState/actions/loginactions";
 import { dispatch } from "react";
 import Joi from "joi-browser";
 import { useParams } from "react-router-dom";
@@ -17,7 +17,6 @@ const AdminRegister = () => {
 
   // define state
   const [admin, setAdmin] = useState({
-
     adminId: "1",
     name: "",
     contact: "",
@@ -29,28 +28,25 @@ const AdminRegister = () => {
   const [errors, setErrors] = useState({});
   const [errRes, setErrRes] = useState("");
 
- const schema = {
-  adminId:Joi.string().required(),
-   name: Joi.string().alphanum().min(5).max(30).required(),
-   contact: Joi.number().integer().min(10).required(),
-   email: Joi.string()
-        .email({
-         minDomainSegments: 2,
-         tlds: { allow: ["com", "net"] },
-       })
+  const schema = {
+    adminId: Joi.string().required(),
+    name: Joi.string().alphanum().min(5).max(30).required(),
+    contact: Joi.number().integer().min(10).required(),
+    email: Joi.string()
+      .email({
+        minDomainSegments: 2,
+        tlds: { allow: ["com", "net"] },
+      })
       .required(),
-      password: Joi.string().required(),
-      role:Joi.string().required(),
+    password: Joi.string().required(),
+    role: Joi.string().required(),
   };
 
-const validate = () => {
-
+  const validate = () => {
     const errors = {}; //object type local variable
 
     const result = Joi.validate(admin, schema, {
-
       abortEarly: false,
-
     });
 
     console.log(result);
@@ -62,47 +58,39 @@ const validate = () => {
     // ex: errors[password] = "password is required";
 
     if (result.error != null)
-
       for (let item of result.error.details) {
         errors[item.path[0]] = item.message;
-
       }
-      return Object.keys(errors).length === 0 ? null : errors;
-
+    return Object.keys(errors).length === 0 ? null : errors;
   };
 
-const adminl= useSelector((state) =>state.login.admins)
+  const adminl = useSelector((state) => state.login.admins);
   const handleChange = (event) => {
-   // copy admin details to newAdmin obj
+    // copy admin details to newAdmin obj
     const newAdmin = { ...admin };
-   newAdmin[event.target.name] = event.target.value;
-// update admin obj with newAdmin obj details
+    newAdmin[event.target.name] = event.target.value;
+    // update admin obj with newAdmin obj details
     setAdmin(newAdmin);
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-   
-// Call validate function
-    // validate login details with schema
-    setErrors(validate());
+    event.preventDefault(); // validate login details with schema
 
-    if (errors) return;
+    // Call validate function
+    setErrors(validate());
+
+    if (errors) return;
     ServiceCall.postApi(AdminApiConstant.registerAdmin, admin)
-        .then (()=>{
-          navigate("/login");
-        })
-            
-      .catch((error) =>{
-  console.log(error);
-  setErrRes(adminl.errMsg);
-})
-  
-
-
+      .then(() => {
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.log(error);
+        setErrRes(adminl.errMsg);
+      });
   };
 
-console.log(admin);
+  console.log(admin);
 
   return (
     <div className="w-50 mx-auto mt-3">
@@ -165,7 +153,7 @@ console.log(admin);
             name="password"
             onChange={handleChange}
           />
-           {errors && <small className="text-danger">{errors.password}</small>}
+          {errors && <small className="text-danger">{errors.password}</small>}
         </div>
         <select
           className="form-select mb-3"
