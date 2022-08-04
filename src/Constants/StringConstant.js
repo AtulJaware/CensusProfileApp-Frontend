@@ -10,8 +10,6 @@ export const StringConstant = {
   loginAdded: "login added successfully with EMAIL",
   loginUpdated: "login updated successfully with EMAIL",
 };
-
- 
 export const USER_TYPE= {
 ADMIN:"Admin",
 USER:"User"
