@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-
-const NotFound = () => {
-    return ( 
-        <div>
+class NotFound extends Component {
+    state = {  } 
+    render() { 
+        return (
             <h1>Page Not Found</h1>
-        </div>
-     );
+        );
+    }
 }
  
 export default NotFound;

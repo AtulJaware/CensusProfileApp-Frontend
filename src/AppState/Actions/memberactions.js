@@ -1,9 +1,8 @@
 import axios from "axios";
 
 handleDelete = (id) => {
-    // http://localhost:8081/member/delete/{id}
-    axios
-      .delete(`http://localhost:8081/member/delete/${id}`)
+    // http://localhost:8001/member/delete/{id}
+    ServiceCall.deleteApi(MemberApiConstant.deleteMember(memId))
       .then((res) => {
         console.log(res);
         // return all members except mem which is selected for delete
