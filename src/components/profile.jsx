@@ -30,7 +30,8 @@ const Profile = () => {
         <div className="card w-50 mx-auto">
           <div className="d-flex justify-content-between card-header">
             <h5>
-              <i className="bi bi-person-lines-fill"></i> Personal Details
+              <i className="bi bi-person-lines-fill"></i>
+              Personal Details
             </h5>
             <h5>
               {login.role === USER_TYPE.USER ? (

@@ -1,34 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { UserServiceCall } from "../../Services/ServiceMethod";
+import React from "react";
+import { useParams } from "react-router-dom";
+import { ServiceCall } from "../../Services/RegisterServiceMethods";
 import { UserApiConstant } from "../../Constants/ApiConstant";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const UpdateUser = () => {
+const AddUser = () => {
+  //value,name,handleOnChange(),hanleSubmit
+  //react hook methods-useState() - define state of component
+  //useEffect - called at the time of page loading and when there is change in state
   const params = useParams();
-  let navigate = useNavigate();
   console.log(params);
 
-  // define state
+  // Define state using useState
+  let navigate = useNavigate();
+
   const [user, setUser] = useState({
-    userId: "",
     firstName: "",
     lastName: "",
-    dob: "",
     contactNo: "",
-    login: {
-      email: "",
-      password: "",
-    },
+    dob: "",
+    email: "",
+    password: "",
+    role: "User",
   });
 
-  //useEffect(callback function,[condition] )
-  // get existing user details using id and update user state obj
-  useEffect(() => {
-    UserServiceCall.getApi(UserApiConstant.getUser(params.id)).then(
-      (response) => setUser(response.data)
-    );
-  }, []);
-
+  // define state
   const handleChange = (event) => {
     console.log(event.target.name); // returns field name
     console.log(event.target.value); // retruns filed value
@@ -36,44 +33,31 @@ const UpdateUser = () => {
     // copy user details to newUser obj
     const newUser = { ...user };
 
-    //newUser.id =10;
-    //newUser["id"] = 10;
-    //update newUser object
+    //update newEmp object
     newUser[event.target.name] = event.target.value;
 
-    // update user obj with newUser obj details
+    // update emp obj with newEmp obj details
     setUser(newUser);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    UserServiceCall.putApi(UserApiConstant.putUser(params.id), user)
-      .then(() => {
-        navigate("/users");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    ServiceCall.postApi(UserApiConstant.postUser, user);
+    navigate("/users");
   };
+
+  console.log(user);
   return (
     <div>
-      <div className="w-50 mx-auto mt-3">
-        <p className="display-6">Update User</p>
-        <form className="border p-3" onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="useId" className="form-label float-start">
-              User ID
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="userId"
-              value={user.userId}
-              name="userId"
-              onChange={handleChange}
-              disabled
-            />
-          </div>
+      <h1>user page</h1>
+      <div>
+        <form
+          onSubmit={handleSubmit}
+          className="w-50 mx-auto border border-secondary rounded mt-4 p-2 shadow-lg p-3 mb-5 bg-body rounded"
+        >
+          <p className="text-center fs-4 bg-secondary text-white">
+            Add New User
+          </p>
           <div className="mb-3">
             <label htmlFor="firstName" className="form-label float-start">
               First Name
@@ -118,7 +102,7 @@ const UpdateUser = () => {
               Contact No.
             </label>
             <input
-              type="text"
+              type="number"
               className="form-control"
               id="contactNo"
               name="contactNo"
@@ -136,7 +120,7 @@ const UpdateUser = () => {
               className="form-control"
               id="email"
               aria-describedby="emailHelp"
-              value={user.login.email}
+              value={user.email}
               name="email"
               onChange={handleChange}
             />
@@ -149,15 +133,14 @@ const UpdateUser = () => {
               type="password"
               className="form-control"
               id="password"
-              value={user.login.password}
+              value={user.password}
               name="password"
               onChange={handleChange}
             />
           </div>
-
           <div className="d-grid gap-2">
             <button type="submit" className="btn btn-primary">
-              Update
+              Add
             </button>
           </div>
         </form>
@@ -165,5 +148,4 @@ const UpdateUser = () => {
     </div>
   );
 };
-
-export default UpdateUser;
+export default AddUser;
