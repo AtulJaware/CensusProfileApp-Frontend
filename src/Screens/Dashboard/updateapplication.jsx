@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ServiceCall } from "../../Services/applicationServiceMethod";
 import { ApiConstant } from "../../Constants/ApiConstant";
 
 const UpdateApplication = () => {
   const params = useParams();
-  let navigate = useNavigate();
   console.log(params);
 
   // define state

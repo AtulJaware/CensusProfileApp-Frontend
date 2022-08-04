@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ServiceCall } from "../../Services/RegisterServiceMethods";
 import { UserApiConstant } from "../../Constants/ApiConstant";
-import { registerAction } from "../../AppState/Actions/loginactions";
-import { dispatch } from "react";
 import Joi from "joi-browser";
 
 
@@ -12,7 +10,7 @@ const UserRegister = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [users, setUser] = useState({
-    userId: "",
+    userId: "1",
     firstName: "",
     lastName: "",
     dob: "",
@@ -26,10 +24,12 @@ const UserRegister = () => {
   const [errRes, setErrRes] = useState("");
 
   const schema = {
-    firstName: Joi.string().alphanum().min(5).max(30).required(),
-    lastName: Joi.string().alphanum().min(5).max(30).required(),
-    contactNo: Joi.number().integer().max(10).required(),
+    firstName: Joi.string().alphanum().max(30).required(),
+    lastName: Joi.string().alphanum().max(30).required(),
+    contactNo: Joi.number().integer().max(9999999999).required(),
     dob: Joi.date().iso().required(),
+    userId: Joi.string().required(),
+    role: Joi.string().required(),
     email: Joi.string()
       .email({
         minDomainSegments: 2,
@@ -71,19 +71,14 @@ const UserRegister = () => {
     setErrors(validate());
 
     if (errors) return;
-
-    // dispatch login action to rest api
-    dispatch(registerAction(users));
-
-    setTimeout(() => {
-      if (userl.users.loggedIn) {
-        ServiceCall.postApi(UserApiConstant.registerUser, users);
+    ServiceCall.postApi(UserApiConstant.registerUser, users)
+      .then(() => {
         navigate("/login");
-      } else {
-        console.log("*********" + userl.errMsg);
+      })
+      .catch((error) => {
+        console.log(error);
         setErrRes(userl.errMsg);
-      }
-    }, 1000);
+      });
   };
   console.log(users);
   return (

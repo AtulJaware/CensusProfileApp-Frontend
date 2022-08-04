@@ -1,7 +1,6 @@
-import React, { Component } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { ScreenName } from "../Routes/screenName";
 import { AppConstant } from "../Constants/AppConstant";
 import { USER_TYPE } from "../Constants/StringConstant";
 
