@@ -54,8 +54,6 @@ const AddMember = () => {
     });
     console.log(result);
     // setting error messages to error properties
-    // ex: errors[username] = "username is required";
-    // ex: errors[password] = "password is required";
     if (result.error != null)
       for (let item of result.error.details) {
         errors[item.path[0]] = item.message;
@@ -81,10 +79,15 @@ const AddMember = () => {
     // Call validate function
     // validate member details with schema
     setErrors(validate());
-
     if (errors) return;
-    ServiceCall.postApi(MemberApiConstant.postMember, mem);
-    navigate("/members");
+
+    ServiceCall.postApi(MemberApiConstant.postMember, mem)
+      .then(() => {
+        navigate("/members");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   return (
     <div>
