@@ -6,6 +6,7 @@ import { ServiceCall } from "../../Services/ServiceMethod";
 import { StringConstant } from "../../Constants/StringConstant";
 import MembersSearchTable from "../../components/MembersSearchTable";
 import { Container, Button, Form, Row } from "react-bootstrap";
+import { NOT_FOUND } from "../../Constants/StringConstant";
 
 const Members = () => {
   const [members, setMembers] = useState([]);
@@ -62,7 +63,9 @@ const Members = () => {
     const searchRes = [];
 
     members.map((mem) => {
-      if (mem.lastName == name) searchRes.push(mem);
+      if (mem.lastName == name) {
+        searchRes.push(mem);
+      } else alert(NOT_FOUND.LAST + name);
     });
     setSearchResult(searchRes);
     setShowMemberstable(false);
@@ -73,7 +76,9 @@ const Members = () => {
     setSearchResult([]);
     const searchRes = [];
     members.map((mem) => {
-      if (mem.firstName == name) searchRes.push(mem);
+      if (mem.firstName == name) {
+        searchRes.push(mem);
+      } else alert(NOT_FOUND.FIRST + name);
     });
     setSearchResult(searchRes);
     setShowMemberstable(false);
@@ -84,7 +89,9 @@ const Members = () => {
     setSearchResult([]);
     const searchRes = [];
     members.map((mem) => {
-      if (mem.dob == dob) searchRes.push(mem);
+      if (mem.dob == dob) {
+        searchRes.push(mem);
+      } else alert(NOT_FOUND.DOB + dob);
     });
     setSearchResult(searchRes);
     setShowMemberstable(false);
