@@ -30,7 +30,7 @@ const AdminRegister = () => {
 
  const schema = {
     name: Joi.string().alphanum().min(5).max(30).required(),
-    contact: Joi.number().integer().max(10).required(),
+    contact: Joi.number().integer().min(10).required(),
     email: Joi.string()
       .email({
         minDomainSegments: 2,

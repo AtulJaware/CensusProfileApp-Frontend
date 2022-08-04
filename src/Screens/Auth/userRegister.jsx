@@ -26,7 +26,7 @@ const UserRegister = () => {
   const schema = {
     firstName: Joi.string().alphanum().min(5).max(30).required(),
     lastName: Joi.string().alphanum().min(5).max(30).required(),
-    contactNo: Joi.number().integer().max(10).required(),
+    contactNo: Joi.number().integer().min(10).required(),
     dob: Joi.date().iso().required(),
     email: Joi.string()
       .email({
