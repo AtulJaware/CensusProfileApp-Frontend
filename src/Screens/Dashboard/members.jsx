@@ -6,7 +6,6 @@ import { ServiceCall } from "../../Services/ServiceMethod";
 import { StringConstant } from "../../Constants/StringConstant";
 import MembersSearchTable from "../../components/MembersSearchTable";
 import { Container, Button, Form, Row } from "react-bootstrap";
-import { NOT_FOUND } from "../../Constants/StringConstant";
 
 const Members = () => {
   const [members, setMembers] = useState([]);
@@ -24,8 +23,6 @@ const Members = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-  
-
   const handlePerformClick = () => {
     console.log(
       "perforam profile",
@@ -67,9 +64,7 @@ const Members = () => {
     const searchRes = [];
 
     members.map((mem) => {
-      if (mem.lastName == name) {
-        searchRes.push(mem);
-      } else alert(NOT_FOUND.LAST + name);
+      if (mem.lastName === name) searchRes.push(mem);
     });
     setSearchResult(searchRes);
     setShowMemberstable(false);
@@ -80,9 +75,7 @@ const Members = () => {
     setSearchResult([]);
     const searchRes = [];
     members.map((mem) => {
-      if (mem.firstName == name) {
-        searchRes.push(mem);
-      } else alert(NOT_FOUND.FIRST + name);
+      if (mem.firstName === name) searchRes.push(mem);
     });
     setSearchResult(searchRes);
     setShowMemberstable(false);
@@ -93,9 +86,7 @@ const Members = () => {
     setSearchResult([]);
     const searchRes = [];
     members.map((mem) => {
-      if (mem.dob == dob) {
-        searchRes.push(mem);
-      } else alert(NOT_FOUND.DOB + dob);
+      if (mem.dob === dob) searchRes.push(mem);
     });
     setSearchResult(searchRes);
     setShowMemberstable(false);
@@ -105,9 +96,7 @@ const Members = () => {
     setSearchResult([]);
     const searchRes = [];
     members.map((mem) => {
-      if (mem.memId == memId) {
-        searchRes.push(mem);
-      } else alert(NOT_FOUND.ID + memId);
+      if (mem.memId == memId) searchRes.push(mem);
     });
     setSearchResult(searchRes);
     setShowMemberstable(false);
