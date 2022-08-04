@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
 import { ServiceCall } from "../../Services/RegisterServiceMethods";
 import { AdminApiConstant } from "../../Constants/ApiConstant";
 import { registerAction } from "../../AppState/Actions/loginactions";
 import { dispatch } from "react";
 import Joi from "joi-browser";
 import { useParams } from "react-router-dom";
-=======
-import Joi from "joi-browser";
->>>>>>> 59cf2fe2f4510b06b8b15f5a56eaa040252f18b8
 
 const AdminRegister = () => {
   const params = useParams();
@@ -33,7 +29,6 @@ const AdminRegister = () => {
   const [errors, setErrors] = useState({});
   const [errRes, setErrRes] = useState("");
 
-<<<<<<< HEAD
  const schema = {
   adminId:Joi.string().required(),
    name: Joi.string().alphanum().min(5).max(30).required(),
@@ -77,34 +72,6 @@ const validate = () => {
   };
 
 const adminl= useSelector((state) =>state.login.admins)
-=======
-  const schema = {
-    name: Joi.string().alphanum().max(30).required(),
-    contact: Joi.number().integer().min(10).required(),
-    //role: Joi.string().required(),
-    email: Joi.string()
-      .email({
-        minDomainSegments: 2,
-        tlds: { allow: ["com", "net"] },
-      })
-      .required(),
-    password: Joi.string().required(),
-  };
-
-  const validate = () => {
-    const errors = {}; //object type local variable
-    const result = Joi.validate(admin, schema, {
-      abortEarly: false,
-    });
-    console.log(result);
-    if (result.error != null)
-      for (let item of result.error.details) {
-        errors[item.path[0]] = item.message;
-      }
-    return Object.keys(errors).length === 0 ? null : errors;
-  };
-
->>>>>>> 59cf2fe2f4510b06b8b15f5a56eaa040252f18b8
   const handleChange = (event) => {
    // copy admin details to newAdmin obj
     const newAdmin = { ...admin };
