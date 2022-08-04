@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Joi from "joi-browser";
 
 const AdminRegister = () => {
   const params = useParams();
@@ -13,6 +14,7 @@ const AdminRegister = () => {
 
   // define state
   const [admin, setAdmin] = useState({
+
     adminId: "1",
     name: "",
     contact: "",
@@ -21,7 +23,36 @@ const AdminRegister = () => {
     role: "Admin",
   });
 
-  
+  const [errors, setErrors] = useState({});
+  const [errRes, setErrRes] = useState("");
+
+  const schema = {
+    name: Joi.string().alphanum().max(30).required(),
+    contact: Joi.number().integer().min(10).required(),
+    adminId: Joi.string().required(),
+    role: Joi.string().required(),
+    email: Joi.string()
+      .email({
+        minDomainSegments: 2,
+        tlds: { allow: ["com", "net"] },
+      })
+      .required(),
+    password: Joi.string().required(),
+  };
+
+  const validate = () => {
+    const errors = {}; //object type local variable
+    const result = Joi.validate(admin, schema, {
+      abortEarly: false,
+    });
+    console.log(result);
+    if (result.error != null)
+      for (let item of result.error.details) {
+        errors[item.path[0]] = item.message;
+      }
+    return Object.keys(errors).length === 0 ? null : errors;
+  };
+
   const handleChange = (event) => {
     console.log(event.target.name); // returns field name
     console.log(event.target.value); // retruns filed value
