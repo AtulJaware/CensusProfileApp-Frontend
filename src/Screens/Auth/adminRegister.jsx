@@ -84,22 +84,20 @@ const adminl= useSelector((state) =>state.login.admins)
     event.preventDefault();
    
 // Call validate function
-    // validate login details with schema
-    setErrors(validate());
+    // validate login details with schema
+    setErrors(validate());
 
-    if (errors) return;
+    if (errors) return;
     ServiceCall.postApi(AdminApiConstant.registerAdmin, admin)
         .then (()=>{
           navigate("/login");
         })
-            
-      .catch((error) =>{
+            
+      .catch((error) =>{
   console.log(error);
   setErrRes(adminl.errMsg);
 })
   
-
-
   };
 
 console.log(admin);

@@ -1,8 +1,10 @@
 import axios from "axios";
+import { LoginApiConstant, UserApiConstant } from "../../Constants/ApiConstant";
+import { LoginServiceCall, ServiceCall } from "../../Services/ServiceMethod";
 
 // Register
 export const registerAction = (users) => async (dispatch) => {
-  const result = await axios.post("http://localhost:8081/user/register", users);
+ const result = await ServiceCall.postApi(UserApiConstant.registerUser,users)
   console.log(result);
   console.log(result.data);
   dispatch({
@@ -14,8 +16,7 @@ export const registerAction = (users) => async (dispatch) => {
 
 // login action
 export const loginAction = (login) => (dispatch) => {
-  axios
-    .post("http://localhost:8081/login/dto", login)
+ LoginServiceCall.postApi(LoginApiConstant.postLogin,login)
     .then((res) => {
       console.log(res);
       dispatch({
@@ -35,7 +36,7 @@ export const loginAction = (login) => (dispatch) => {
 
 // logout action
 export const logoutAction = (email) => async (dispatch) => {
-  const result = await axios.patch(`http://localhost:8081/logout/${email}`);
+ const result = await LoginServiceCall.patchApi(LoginApiConstant.patchLogin(),email)
   console.log(result);
   console.log(result.data);
   dispatch({
