@@ -1,6 +1,6 @@
 export const StringConstant = {
-    updateAppMessage : " Updateded Application Successfully!",
-    successMessage: "logged in successfully!",
+  updateAppMessage: " Updateded Application Successfully!",
+  successMessage: "logged in successfully!",
   deleteAlert: "Are you sure you want to delete",
   memberAdded: "Member Added successfully with ID ",
   memberUpdated: "Member Updated successfully with ID ",
@@ -10,8 +10,8 @@ export const StringConstant = {
   loginAdded: "login added successfully with EMAIL",
   loginUpdated: "login updated successfully with EMAIL",
 };
-export const USER_TYPE= {
-ADMIN:"Admin",
-USER:"User"
-}
 
+export const USER_TYPE = {
+  ADMIN: "Admin",
+  USER: "User",
+};
