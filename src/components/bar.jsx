@@ -32,8 +32,8 @@ const Bar = () => {
             </li>
             {login.loggedIn && login.role === USER_TYPE.USER && (
               <li className="nav-item">
-                <NavLink className="nav-link" to="/admins">
-                  Admins
+                <NavLink className="nav-link" to="/members">
+                  Members
                 </NavLink>
               </li>
             )}
