@@ -28,7 +28,6 @@ const AddUser = () => {
   });
 
   const [errors, setErrors] = useState({});
-  const [errRes, setErrRes] = useState("");
 
   const schema = {
     firstName: Joi.string().alphanum().max(30).required(),
@@ -62,8 +61,6 @@ const AddUser = () => {
     return Object.keys(errors).length === 0 ? null : errors;
   };
 
-  const userl = useSelector((state) => state.login.user);
-
   // define state
   const handleChange = (event) => {
     console.log(event.target.name); // returns field name
@@ -93,16 +90,14 @@ const AddUser = () => {
     })
     .catch((error) => {
       console.log(error);
-      setErrRes(userl.errMsg);
     });
   };
 
   console.log(user);
   return (
     <div>
-      <h1>user page</h1>
-      {errRes && <p className="alert alert-danger">{errRes}</p>}
-      <div>
+     <div className="w-50 mx-auto mt-3">
+        <p className="display-6">Add New User</p>
         <form
           onSubmit={handleSubmit}
           className="w-50 mx-auto border border-secondary rounded mt-4 p-2 shadow-lg p-3 mb-5 bg-body rounded"
@@ -122,7 +117,9 @@ const AddUser = () => {
               name="firstName"
               onChange={handleChange}
             />
-            {errors && <small className="text-danger">{errors.firstName}</small>}
+            {errors && (
+              <small className="text-danger">{errors.firstName}</small>
+            )}
           </div>
           <div className="mb-3">
             <label htmlFor="lastName" className="form-label float-start">

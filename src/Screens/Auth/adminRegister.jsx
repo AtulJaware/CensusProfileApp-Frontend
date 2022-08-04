@@ -29,18 +29,18 @@ const AdminRegister = () => {
   const [errors, setErrors] = useState({});
   const [errRes, setErrRes] = useState("");
 
- const schema = {
-  adminId:Joi.string().required(),
-   name: Joi.string().alphanum().min(5).max(30).required(),
-   contact: Joi.number().integer().min(10).required(),
-   email: Joi.string()
-        .email({
-         minDomainSegments: 2,
-         tlds: { allow: ["com", "net"] },
-       })
+  const schema = {
+    adminId: Joi.integer().required(),
+    name: Joi.string().alphanum().max(30).required(),
+    contact: Joi.number().integer().min(10).required(),
+    email: Joi.string()
+      .email({
+        minDomainSegments: 2,
+        tlds: { allow: ["com", "net"] },
+      })
       .required(),
-      password: Joi.string().required(),
-      role:Joi.string().required(),
+    password: Joi.string().required(),
+    role: Joi.string().required(),
   };
 
 const validate = () => {
