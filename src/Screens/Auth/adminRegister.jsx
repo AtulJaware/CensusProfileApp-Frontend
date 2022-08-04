@@ -27,9 +27,9 @@ const AdminRegister = () => {
   const [errRes, setErrRes] = useState("");
 
   const schema = {
+    adminId: Joi.integer().required(),
     name: Joi.string().alphanum().max(30).required(),
     contact: Joi.number().integer().min(10).required(),
-    //role: Joi.string().required(),
     email: Joi.string()
       .email({
         minDomainSegments: 2,
@@ -37,6 +37,7 @@ const AdminRegister = () => {
       })
       .required(),
     password: Joi.string().required(),
+    role: Joi.string().required(),
   };
 
   const validate = () => {
