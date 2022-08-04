@@ -34,7 +34,7 @@ const AddUser = () => {
     lastName: Joi.string().alphanum().max(30).required(),
     contactNo: Joi.number().integer().max(9999999999).required(),
     dob: Joi.date().iso().required(),
-    userId: Joi.string().required(),
+    //userId: Joi.string().required(),
     role: Joi.string().required(),
     email: Joi.string()
       .email({
