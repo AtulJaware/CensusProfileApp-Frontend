@@ -41,6 +41,9 @@ const Members = () => {
       case "BY_DOB":
         findByFnameDOB(searchInput.current.value);
         break;
+      case "BY_ID":
+        findById(searchInput.current.value);
+        break;
       // default:
       //     alert("choose action to proceed");
     }
@@ -92,6 +95,16 @@ const Members = () => {
       if (mem.dob == dob) {
         searchRes.push(mem);
       } else alert(NOT_FOUND.DOB + dob);
+    });
+    setSearchResult(searchRes);
+    setShowMemberstable(false);
+    setShowSearchMember(true);
+  };
+  const findById = (memId) => {
+    setSearchResult([]);
+    const searchRes = [];
+    members.map((mem) => {
+      if (mem.memId == memId) searchRes.push(mem);
     });
     setSearchResult(searchRes);
     setShowMemberstable(false);
@@ -164,6 +177,7 @@ const Members = () => {
             <option value="BY_FNAME">First Name</option>
             <option value="BY_LNAME">Last Name</option>
             <option value="BY_DOB">Date of Birth</option>
+            <option value="BY_ID">Member Id</option>
           </Form.Select>
           &nbsp;&nbsp;
           <Form.Control
