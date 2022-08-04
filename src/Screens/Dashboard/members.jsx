@@ -104,7 +104,9 @@ const Members = () => {
     setSearchResult([]);
     const searchRes = [];
     members.map((mem) => {
-      if (mem.memId == memId) searchRes.push(mem);
+      if (mem.memId == memId) {
+        searchRes.push(mem);
+      } else alert(NOT_FOUND.ID + memId);
     });
     setSearchResult(searchRes);
     setShowMemberstable(false);
