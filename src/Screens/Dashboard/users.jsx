@@ -23,7 +23,7 @@ const Users = () => {
         setUsers(response.data);
       })
       .catch((error) => console.log(error));
-  },[])
+  }, []);
   
   const handlePerformClick = () => {
     console.log(
