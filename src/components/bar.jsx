@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AppConstant } from "../Constants/AppConstant";
 import { USER_TYPE } from "../Constants/StringConstant";
+import Members from "../Screens/Dashboard/members";
 
 const Bar = () => {
   const login = useSelector((state) => state.login.login);
@@ -32,8 +33,8 @@ const Bar = () => {
             </li>
             {login.loggedIn && login.role === USER_TYPE.USER && (
               <li className="nav-item">
-                <NavLink className="nav-link" to="/admins">
-                  Admins
+                <NavLink className="nav-link" to="/members">
+                  Members
                 </NavLink>
               </li>
             )}
@@ -48,9 +49,9 @@ const Bar = () => {
               <li className="nav-item">
                 <NavLink className="nav-link" to="/admins">
                   Admins
-                  </NavLink>
-                  </li>
-                  )}
+                </NavLink>
+              </li>
+            )}
 
             {login.loggedIn && login.role === USER_TYPE.ADMIN && (
               <li className="nav-item">

@@ -24,7 +24,7 @@ const Users = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-  
+
   const handlePerformClick = () => {
     console.log(
       "perforam profile",
@@ -90,7 +90,6 @@ const Users = () => {
     setShowSearchUser(true);
   };
 
-
   const findByEmail = (name) => {
     setSearchResult([]);
     const searchRes = [];
@@ -103,7 +102,6 @@ const Users = () => {
     setShowUserstable(false);
     setShowSearchUser(true);
   };
-
 
   const findByFnameDOB = (dob) => {
     setSearchResult([]);
@@ -156,7 +154,7 @@ const Users = () => {
               <td>{user.dob}</td>
               <td>{user.contactNo}</td>
               <td>{user.login.email}</td>
-              
+
               <td>
                 <Link to={`/user/update/${user.userId}`}>
                   <i className="bi bi-pencil-square me-3" type="button"></i>
@@ -202,9 +200,7 @@ const Users = () => {
         </Row>
       </Container>
       <br />
-      {showSearchUser ? (
-        <UsersSearchTable searchResult={searchResult} />
-      ) : null}
+      {showSearchUser ? <UsersSearchTable searchResult={searchResult} /> : null}
     </div>
   );
 };
