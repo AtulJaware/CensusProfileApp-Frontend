@@ -20,6 +20,7 @@ const AdminRegister = () => {
     password: "",
     role: "Admin",
   });
+
   
   const handleChange = (event) => {
     console.log(event.target.name); // returns field name
