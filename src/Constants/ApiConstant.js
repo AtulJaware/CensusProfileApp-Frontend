@@ -32,4 +32,3 @@ getAdmins: DOMAIN + `admins`,
 deleteAdmin: (adminId) => DOMAIN +`admin/delete/${adminId}`,
 postAdmin: DOMAIN + "admin/add",
 };
-
