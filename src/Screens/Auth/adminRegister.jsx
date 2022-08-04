@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ServiceCall } from "../../Services/RegisterServiceMethods";
 import { AdminApiConstant } from "../../Constants/ApiConstant";
+import { useParams } from "react-router-dom";
 import { dispatch } from "react";
 import Joi from "joi-browser";
 const AdminRegister = () => {
