@@ -28,6 +28,11 @@ export const UserApiConstant = {
 export const AdminApiConstant = {
   registerAdmin: DOMAIN + "admin/register",
   getAdmin: (email) => DOMAIN + `admin/email/${email}`,
+  getAdmin: (adminId) => DOMAIN + `admin/${adminId}`,
+  postAdmin: DOMAIN + "admin/add",
+  getAdmins: DOMAIN + "admins",
+  putAdmin: (adminId) => DOMAIN + `admin/update/${adminId}`,
+  deleteAdmin: (adminId) => DOMAIN + `admin/delete/${adminId}`,
 };
 
 export const LoginApiConstant = {

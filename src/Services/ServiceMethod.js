@@ -99,6 +99,53 @@ export const UserServiceCall = {
     });
   },
 };
+export const AdminServiceCall ={
+  getApi: (url) => {
+    return new Promise(function (resolve, reject) {
+      axios
+        .get(url)
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => reject(error));
+    });
+  },
+   postApi: (url, admin) => {
+    return new Promise(function (resolve, reject) {
+
+      axios
+        .post(url, admin)
+        .then((response) => {
+          alert("Admin Added with ID " + response.data.adminId + " successfully!");
+          console.log(response);
+          resolve(response);
+        })
+        .catch((error) => reject(error));
+    });
+  },
+  deleteApi: (url) => {
+    return new Promise(function (resolve, reject) {
+      axios
+        .delete(url)
+        .then((response) => {
+          resolve(response);
+        })
+        .catch((error) => reject(error));
+    });
+  },
+  putApi:(url,admin)=>{
+    return new Promise(function (resolve,reject) {
+      axios
+      .put(url, admin)
+        .then((response) => {
+          resolve(response);
+          console.log(response);
+        alert("admin Updated with ID " + response.data.adminId + " successfully!");
+        })
+        .catch((error) => reject(error));
+      });
+  },
+  };
 
 export const LoginServiceCall = {
  postApi: (url,login) => {

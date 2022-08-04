@@ -98,8 +98,6 @@ const adminl= useSelector((state) =>state.login.admins)
   setErrRes(adminl.errMsg);
 })
   
-
-
   };
 
 console.log(admin);
