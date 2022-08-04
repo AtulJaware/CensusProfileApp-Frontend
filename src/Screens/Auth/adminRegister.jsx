@@ -13,7 +13,7 @@ const AdminRegister = () => {
   console.log(params);
 
   // Define state using useState
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   // define state
   const [admin, setAdmin] = useState({
@@ -29,16 +29,18 @@ const AdminRegister = () => {
   const [errRes, setErrRes] = useState("");
 
  const schema = {
-    name: Joi.string().alphanum().min(5).max(30).required(),
-    contact: Joi.number().integer().min(10).required(),
-    email: Joi.string()
-      .email({
-        minDomainSegments: 2,
-        tlds: { allow: ["com", "net"] },
-      })
-      .required(),
-    password: Joi.string().required(),
-  };
+  adminId:Joi.string().required(),
+   name: Joi.string().alphanum().min(5).max(30).required(),
+   contact: Joi.number().integer().min(10).required(),
+   email: Joi.string()
+        .email({
+         minDomainSegments: 2,
+         tlds: { allow: ["com", "net"] },
+       })
+      .required(),
+      password: Joi.string().required(),
+      role:Joi.string().required(),
+  };
 
 const validate = () => {
 
@@ -61,26 +63,19 @@ const validate = () => {
     if (result.error != null)
 
       for (let item of result.error.details) {
-
         errors[item.path[0]] = item.message;
 
       }
-
-    return Object.keys(errors).length === 0 ? null : errors;
+      return Object.keys(errors).length === 0 ? null : errors;
 
   };
 
-const adminl = useSelector((state) => state.login.admin);
+const adminl= useSelector((state) =>state.login.admins)
   const handleChange = (event) => {
-    console.log(event.target.name); // returns field name
-    console.log(event.target.value); // retruns filed value
-
-    // copy admin details to newAdmin obj
+   // copy admin details to newAdmin obj
     const newAdmin = { ...admin };
-
-    newAdmin[event.target.name] = event.target.value;
-
-    // update admin obj with newAdmin obj details
+   newAdmin[event.target.name] = event.target.value;
+// update admin obj with newAdmin obj details
     setAdmin(newAdmin);
   };
 
@@ -92,19 +87,16 @@ const adminl = useSelector((state) => state.login.admin);
     setErrors(validate());
 
     if (errors) return;
-
-    // dispatch login action to rest api
-    dispatch(registerAction(admin));
-
-    setTimeout(() => {
-      if (adminl.admin.loggedIn) {
-        ServiceCall.postApi(AdminApiConstant.registerAdmin, admin);
-        navigate("/login");
-      } else {
-        console.log("*********" + adminl.errMsg);
-        setErrRes(adminl.errMsg);
-      }
-    }, 1000);
+    ServiceCall.postApi(AdminApiConstant.registerAdmin, admin)
+        .then (()=>{
+          navigate("/login");
+        })
+            
+      .catch((error) =>{
+  console.log(error);
+  setErrRes(adminl.errMsg);
+})
+  
 
 
   };

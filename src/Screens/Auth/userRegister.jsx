@@ -3,8 +3,6 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ServiceCall } from "../../Services/RegisterServiceMethods";
 import { UserApiConstant } from "../../Constants/ApiConstant";
-import { registerAction } from "../../AppState/Actions/loginactions";
-import { dispatch } from "react";
 import Joi from "joi-browser";
 
 const UserRegister = () => {
@@ -22,8 +20,6 @@ const UserRegister = () => {
 
   const [errors, setErrors] = useState({});
   const [errRes, setErrRes] = useState("");
-//validation rules
- 
 
   const schema = {
     firstName: Joi.string().alphanum().max(30).required(),
@@ -73,19 +69,14 @@ const UserRegister = () => {
     setErrors(validate());
 
     if (errors) return;
-
-    // dispatch login action to rest api
-    dispatch(registerAction(users));
-
-    setTimeout(() => {
-      if (userl.users.loggedIn) {
-        ServiceCall.postApi(UserApiConstant.registerUser, users);
+    ServiceCall.postApi(UserApiConstant.registerUser, users)
+      .then(() => {
         navigate("/login");
-      } else {
-        console.log("*********" + userl.errMsg);
+      })
+      .catch((error) => {
+        console.log(error);
         setErrRes(userl.errMsg);
-      }
-    }, 1000);
+      });
   };
   console.log(users);
   return (

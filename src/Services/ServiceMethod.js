@@ -1,4 +1,5 @@
 import axios from "axios";
+import { DOMAIN } from "../Constants/ApiConstant";
 import { StringConstant } from "../Constants/StringConstant";
 export const REQUEST_METHODS = {
   POST: "POST",
@@ -58,9 +59,6 @@ export const UserServiceCall = {
       axios
         .get(url)
         .then((response) => {
-          alert(
-            "Member Added with ID " + response.data.memId + " successfully!"
-          );
           resolve(response);
         })
         .catch((error) => reject(error));
@@ -101,4 +99,30 @@ export const UserServiceCall = {
         .catch((error) => reject(error));
     });
   },
+};
+
+export const LoginServiceCall = {
+ postApi: (url,login) => {
+  return new Promise(function (resolve, reject) {
+    axios
+    .post(url,login)
+    .then((response) => {
+      alert(StringConstant.loginAdded+response.data.email);
+      resolve(response);
+    })
+    .catch ((error) => reject(error));
+  });
+ },
+ patchApi: (url,login) => {
+  return new Promise(function (reslove, reject){
+    axios
+    .patch(url,login)
+    .then((response) =>{
+      reslove(response);
+      alert(StringConstant.loginUpdated+response.data.email);
+    })
+
+.catch ((error) => reject(error));
+  });
+ },
 };
