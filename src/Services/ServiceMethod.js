@@ -58,6 +58,9 @@ export const UserServiceCall = {
       axios
         .get(url)
         .then((response) => {
+          alert(
+            "Member Added with ID " + response.data.memId + " successfully!"
+          );
           resolve(response);
         })
         .catch((error) => reject(error));
