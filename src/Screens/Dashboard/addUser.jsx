@@ -1,9 +1,11 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { ServiceCall } from "../../Services/RegisterServiceMethods";
 import { UserApiConstant } from "../../Constants/ApiConstant";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Joi from "joi-browser";
 
 const AddUser = () => {
   //value,name,handleOnChange(),hanleSubmit
@@ -25,7 +27,42 @@ const AddUser = () => {
     role: "User",
   });
 
-  
+  const [errors, setErrors] = useState({});
+  const [errRes, setErrRes] = useState("");
+
+  const schema = {
+    firstName: Joi.string().alphanum().max(30).required(),
+    lastName: Joi.string().alphanum().max(30).required(),
+    contactNo: Joi.number().integer().max(9999999999).required(),
+    dob: Joi.date().iso().required(),
+    userId: Joi.string().required(),
+    role: Joi.string().required(),
+    email: Joi.string()
+      .email({
+        minDomainSegments: 2,
+        tlds: { allow: ["com", "net"] },
+      })
+      .required(),
+    password: Joi.string().required(),
+  };
+
+  const validate = () => {
+    const errors = {}; //object type local variable
+    const result = Joi.validate(user, schema, {
+      abortEarly: false,
+    });
+    console.log(result);
+    // setting error messages to error properties
+    // ex: errors[username] = "username is required";
+    // ex: errors[password] = "password is required";
+    if (result.error != null)
+      for (let item of result.error.details) {
+        errors[item.path[0]] = item.message;
+      }
+    return Object.keys(errors).length === 0 ? null : errors;
+  };
+
+  const userl = useSelector((state) => state.login.user);
 
   // define state
   const handleChange = (event) => {
@@ -44,14 +81,27 @@ const AddUser = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    ServiceCall.postApi(UserApiConstant.postUser, user);
-    navigate("/users");
+
+    // Call validate function
+    // validate login details with schema
+    setErrors(validate());
+
+    if (errors) return;
+    ServiceCall.postApi(UserApiConstant.postUser, user)
+    .then(() => {
+      navigate("/login");
+    })
+    .catch((error) => {
+      console.log(error);
+      setErrRes(userl.errMsg);
+    });
   };
 
   console.log(user);
   return (
     <div>
       <h1>user page</h1>
+      {errRes && <p className="alert alert-danger">{errRes}</p>}
       <div>
         <form
           onSubmit={handleSubmit}
@@ -72,6 +122,7 @@ const AddUser = () => {
               name="firstName"
               onChange={handleChange}
             />
+            {errors && <small className="text-danger">{errors.firstName}</small>}
           </div>
           <div className="mb-3">
             <label htmlFor="lastName" className="form-label float-start">
@@ -85,6 +136,7 @@ const AddUser = () => {
               name="lastName"
               onChange={handleChange}
             />
+            {errors && <small className="text-danger">{errors.lastName}</small>}
           </div>
           <div className="mb-3">
             <label htmlFor="dob" className="form-label float-start">
@@ -98,6 +150,7 @@ const AddUser = () => {
               name="dob"
               onChange={handleChange}
             />
+             {errors && <small className="text-danger">{errors.dob}</small>}
           </div>
           <div className="mb-3">
             <label htmlFor="contactNo" className="form-label float-start">
@@ -111,6 +164,7 @@ const AddUser = () => {
               value={user.contactNo}
               onChange={handleChange}
             />
+            {errors && <small className="text-danger">{errors.contactNo}</small>}
           </div>
 
           <div className="mb-3">
@@ -126,6 +180,7 @@ const AddUser = () => {
               name="email"
               onChange={handleChange}
             />
+             {errors && <small className="text-danger">{errors.email}</small>}
           </div>
           <div className="mb-3">
             <label htmlFor="password" className="form-label float-start">
@@ -139,12 +194,13 @@ const AddUser = () => {
               name="password"
               onChange={handleChange}
             />
+            {errors && <small className="text-danger">{errors.password}</small>}
           </div>
-          <div className="d-grid gap-2">
-            <button type="submit" className="btn btn-primary">
-              Add
+          <div className="d-grid gap-2 mt-3">
+            <button type="submit" className="btn btn-secondary">
+              Submit
             </button>
-          </div>
+        </div>
         </form>
       </div>
     </div>

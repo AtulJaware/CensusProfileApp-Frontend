@@ -176,10 +176,10 @@ const UserRegister = () => {
           />
           {errors && <small className="text-danger">{errors.password}</small>}
         </div>
-        <div className="d-grid gap-2">
-          <button type="submit" className="btn btn-primary">
-            Register
-          </button>
+        <div className="d-grid gap-2 mt-3">
+            <button type="submit" className="btn btn-secondary">
+              Submit
+            </button>
         </div>
       </form>
     </div>
