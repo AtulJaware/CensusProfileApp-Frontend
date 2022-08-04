@@ -18,7 +18,8 @@ class Users extends Component {
   }
   // Delete user
   handleDelete = (id) => {
-    // http://localhost:9002/user/{id}
+   
+    // http://localhost:8001/user/{id}
     if (window.confirm(StringConstant.deleteAlert)) {
       UserServiceCall.deleteApi(UserApiConstant.deleteUser(id))
         .then((response) => {
