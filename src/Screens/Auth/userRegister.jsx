@@ -3,11 +3,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ServiceCall } from "../../Services/RegisterServiceMethods";
 import { UserApiConstant } from "../../Constants/ApiConstant";
-<<<<<<< HEAD
 import { registerAction } from "../../AppState/Actions/loginactions";
 import { dispatch } from "react";
-=======
->>>>>>> 58aef4f4564080cf755b0b72b8aa01464575ccae
 import Joi from "joi-browser";
 
 const UserRegister = () => {
@@ -25,14 +22,8 @@ const UserRegister = () => {
 
   const [errors, setErrors] = useState({});
   const [errRes, setErrRes] = useState("");
-<<<<<<< HEAD
 //validation rules
-  const schema = {
-    firstName: Joi.string().alphanum().min(5).max(30).required(),
-    lastName: Joi.string().alphanum().min(5).max(30).required(),
-    contactNo: Joi.number().integer().min(10).required(),
-    dob: Joi.date().iso().required(),
-=======
+ 
 
   const schema = {
     firstName: Joi.string().alphanum().max(30).required(),
@@ -41,7 +32,6 @@ const UserRegister = () => {
     dob: Joi.date().iso().required(),
     userId: Joi.string().required(),
     role: Joi.string().required(),
->>>>>>> 58aef4f4564080cf755b0b72b8aa01464575ccae
     email: Joi.string()
       .email({
         minDomainSegments: 2,
@@ -83,7 +73,6 @@ const UserRegister = () => {
     setErrors(validate());
 
     if (errors) return;
-<<<<<<< HEAD
 
     // dispatch login action to rest api
     dispatch(registerAction(users));
@@ -97,16 +86,6 @@ const UserRegister = () => {
         setErrRes(userl.errMsg);
       }
     }, 1000);
-=======
-    ServiceCall.postApi(UserApiConstant.registerUser, users)
-      .then(() => {
-        navigate("/login");
-      })
-      .catch((error) => {
-        console.log(error);
-        setErrRes(userl.errMsg);
-      });
->>>>>>> 58aef4f4564080cf755b0b72b8aa01464575ccae
   };
   console.log(users);
   return (

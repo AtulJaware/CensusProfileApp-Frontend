@@ -18,22 +18,14 @@ class Users extends Component {
   }
   // Delete user
   handleDelete = (id) => {
-<<<<<<< HEAD
+   
     // http://localhost:8001/user/{id}
-    UserServiceCall.deleteApi(UserApiConstant.deleteUser(id))
-      .then((response) => {
-        console.log(response);
-        // return all users except user which is selected for delete
-        const user = this.state.users.filter((user) => user.userId !== id);
-=======
-    // http://localhost:9002/user/{id}
     if (window.confirm(StringConstant.deleteAlert)) {
       UserServiceCall.deleteApi(UserApiConstant.deleteUser(id))
         .then((response) => {
           console.log(response);
           // return all users except user which is selected for delete
           const user = this.state.users.filter((user) => user.userId !== id);
->>>>>>> 58aef4f4564080cf755b0b72b8aa01464575ccae
 
           // update state object with users
           this.setState({ users: user });
