@@ -29,8 +29,8 @@ const AdminRegister = () => {
   const [errRes, setErrRes] = useState("");
 
   const schema = {
-    adminId: Joi.string().required(),
-    name: Joi.string().alphanum().min(5).max(30).required(),
+    adminId: Joi.integer().required(),
+    name: Joi.string().alphanum().max(30).required(),
     contact: Joi.number().integer().min(10).required(),
     email: Joi.string()
       .email({
@@ -84,6 +84,7 @@ const AdminRegister = () => {
       .then(() => {
         navigate("/login");
       })
+
       .catch((error) => {
         console.log(error);
         setErrRes(adminl.errMsg);
