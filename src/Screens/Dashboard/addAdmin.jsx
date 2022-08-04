@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminServiceCall } from "../../Services/ServiceMethod";
 import { AdminApiConstant } from "../../Constants/ApiConstant";
-
+import Joi from "joi-browser";
 const AddAdmin = () => {
   const params = useParams();
   console.log(params);
@@ -22,6 +22,36 @@ const AddAdmin = () => {
     password: "",
     role: "Admin",
   });
+  const [errors, setErrors] = useState({});
+  
+const schema = {
+    adminId: Joi.string().required(),
+    name: Joi.string().alphanum().max(30).required(),
+    contact: Joi.number().integer().max(9999999999).required(),
+    email: Joi.string()
+      .email({
+        minDomainSegments: 2,
+        tlds: { allow: ["com", "net"] },
+      })
+      .required(),
+    password: Joi.string().required(),
+    role: Joi.string().required(),
+  };
+const validate = () => {
+    const errors = {}; //object type local variable
+    const result = Joi.validate(admin, schema, {
+      abortEarly: false,
+    });
+    console.log(result);
+    // setting error messages to error properties
+    // ex: errors[adminname] = "adminname is required";
+    // ex: errors[password] = "password is required";
+    if (result.error != null)
+      for (let item of result.error.details) {
+        errors[item.path[0]] = item.message;
+      }
+    return Object.keys(errors).length === 0 ? null : errors;
+  };
   const handleChange = (event) => {
     console.log(event.target.name); // returns field name
     console.log(event.target.value); // retruns filed value
@@ -37,8 +67,10 @@ const AddAdmin = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-       // AdminServiceCall.postApi(AdminApiConstant.postAdmin,admin)
-        //navigate("/admins");
+       // Call validate function
+    // validate login details with schema
+    setErrors(validate())
+    if (errors) return;
         AdminServiceCall.postApi(AdminApiConstant.postAdmin,admin).then (()=>{
 navigate("/admins");
 }).catch(error=>{console.log("Error")})
@@ -51,19 +83,6 @@ navigate("/admins");
         <p className="display-6">Add New Admin</p>
         <form className="border p-3" onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="firstName" className="form-label float-start">
-              AdminId
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="adminId"
-              value={admin.adminId}
-              name="adminId"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="mb-3">
             <label htmlFor="name" className="form-label float-start">
                Name
             </label>
@@ -75,8 +94,12 @@ navigate("/admins");
               name="name"
               onChange={handleChange}
             />
+            {errors && (
+              <small className="text-danger">{errors.name}</small>
+
+            )}
           </div>
-                    <div className="mb-3">
+           <div className="mb-3">
             <label htmlFor="contact" className="form-label float-start">
             Contact
             </label>
@@ -88,6 +111,11 @@ navigate("/admins");
               name="contact"
               onChange={handleChange}
             />
+            {errors && (
+
+              <small className="text-danger">{errors.contact}</small>
+
+            )}
           </div>
           <div className="mb-3">
             <label htmlFor="email" className="form-label float-start">
@@ -101,6 +129,11 @@ navigate("/admins");
               name="email"
               onChange={handleChange}
             />
+            {errors && (
+
+              <small className="text-danger">{errors.email}</small>
+
+            )}
           </div>
           <div className="mb-3">
             <label htmlFor="password" className="form-label float-start">
@@ -114,6 +147,11 @@ navigate("/admins");
               value={admin.password}
               onChange={handleChange}
             />
+            {errors && (
+
+              <small className="text-danger">{errors.password}</small>
+
+            )}
           </div>
           <div className="d-grid gap-2">
             <button type="submit" className="btn btn-primary">

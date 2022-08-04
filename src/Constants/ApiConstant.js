@@ -21,10 +21,11 @@ export const UserApiConstant = {
   getUsers: DOMAIN + `users`,
   getUserEmail: (email) => DOMAIN + `user/email/${email}`,
   deleteUser: (id) => DOMAIN + `user/delete/${id}`,
-  putUser: (id) => DOMAIN + `user/${id}`,
+  putUser: (id) => DOMAIN + `user/update/${id}`,
 };
 
 export const AdminApiConstant ={
+registerAdmin: DOMAIN + "admin/register",
 getAdmin: (email) => DOMAIN + `admin/email/${email}`,
 putAdmin: (adminId) => DOMAIN + `admin/update/${adminId}`,
 //getAdmin: (adminId) => DOMAIN + `admin/${adminId}`,
