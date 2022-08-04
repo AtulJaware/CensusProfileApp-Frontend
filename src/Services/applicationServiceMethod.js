@@ -15,11 +15,11 @@ export const ServiceCall =  {
             });
         },
 
-       putApi: (url) => {
+       putApi: (url,app) => {
 
             return new Promise(function (resolve, reject) {
                 axios
-                    .put(url)
+                    .put(url,app)
                     .then((response) => {
                         resolve(response);
                     })
