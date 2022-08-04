@@ -1,4 +1,4 @@
-export const DOMAIN = "http://localhost:8081/";
+export const DOMAIN = "http://localhost:8001/";
 
 export const ApiConstant = {
   applicationApi: DOMAIN + "application",
@@ -21,9 +21,16 @@ export const UserApiConstant = {
   getUsers: DOMAIN + `users`,
   getUserEmail: (email) => DOMAIN + `user/email/${email}`,
   deleteUser: (id) => DOMAIN + `user/delete/${id}`,
-  putUser: (id) => DOMAIN + `user/${id}`,
+  putUser: (id) => DOMAIN + `user/update/${id}`,
 };
 
 export const AdminApiConstant = {
+  registerAdmin: DOMAIN + "admin/register",
   getAdmin: (email) => DOMAIN + `admin/email/${email}`,
 };
+
+export const LoginApiConstant = {
+   patchLogin: (email) => DOMAIN+ `logout/${email}`,
+   postLogin: DOMAIN+ `login/dto`,
+
+}
