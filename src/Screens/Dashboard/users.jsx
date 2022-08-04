@@ -25,6 +25,7 @@ const Users = () => {
       .catch((error) => console.log(error));
   }, []);
   
+
   const handlePerformClick = () => {
     console.log(
       "perforam profile",
@@ -39,13 +40,14 @@ const Users = () => {
         findByFname(searchInput.current.value);
         break;
       case "BY_DOB":
-        findByFnameDOB(searchInput.current.value);
+        findByDOB(searchInput.current.value);
         break;
       case "BY_ID":
         findById(searchInput.current.value);
         break;
       case "BY_EMAIL":
         findByEmail(searchInput.current.value);
+        break;
       // default:
       //     alert("choose action to proceed");
     }
@@ -70,7 +72,7 @@ const Users = () => {
     users.map((user) => {
       if (user.lastName == name) {
         searchRes.push(user);
-      } else alert(NOT_FOUND.LAST + name);
+      } else alert(NOT_FOUND.LASTNAME + name);
     });
     setSearchResult(searchRes);
     setShowUserstable(false);
@@ -83,13 +85,12 @@ const Users = () => {
     users.map((user) => {
       if (user.firstName == name) {
         searchRes.push(user);
-      } else alert(NOT_FOUND.FIRST + name);
+      } else alert(NOT_FOUND.FIRSTNAME + name);
     });
     setSearchResult(searchRes);
     setShowUserstable(false);
     setShowSearchUser(true);
   };
-
 
   const findByEmail = (name) => {
     setSearchResult([]);
@@ -104,14 +105,13 @@ const Users = () => {
     setShowSearchUser(true);
   };
 
-
-  const findByFnameDOB = (dob) => {
+  const findByDOB = (dob) => {
     setSearchResult([]);
     const searchRes = [];
     users.map((user) => {
       if (user.dob == dob) {
         searchRes.push(user);
-      } else alert(NOT_FOUND.DOB + dob);
+      } else alert(NOT_FOUND.DOBirth + dob);
     });
     setSearchResult(searchRes);
     setShowUserstable(false);
@@ -123,7 +123,7 @@ const Users = () => {
     users.map((user) => {
       if (user.userId == userId) {
         searchRes.push(user);
-      } else alert(NOT_FOUND.ID + userId);
+      } else alert(NOT_FOUND.USERID + userId);
     });
     setSearchResult(searchRes);
     setShowUserstable(false);
