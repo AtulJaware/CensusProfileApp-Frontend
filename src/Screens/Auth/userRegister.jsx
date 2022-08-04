@@ -71,7 +71,7 @@ const UserRegister = () => {
     setErrors(validate());
 
     if (errors) return;
-    ServiceCall.postApi(UserApiConstant.registerUser, users)
+    ServiceCall.userPostApi(UserApiConstant.registerUser, users)
       .then(() => {
         navigate("/login");
       })

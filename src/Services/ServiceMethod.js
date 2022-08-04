@@ -1,5 +1,4 @@
 import axios from "axios";
-import { DOMAIN } from "../Constants/ApiConstant";
 import { StringConstant } from "../Constants/StringConstant";
 export const REQUEST_METHODS = {
   POST: "POST",
@@ -153,7 +152,7 @@ export const LoginServiceCall = {
     axios
     .post(url,login)
     .then((response) => {
-      alert(StringConstant.loginAdded+response.data.email);
+      alert(StringConstant.loginMsg + response.data.email);
       resolve(response);
     })
     .catch ((error) => reject(error));
@@ -165,7 +164,7 @@ export const LoginServiceCall = {
     .patch(url,login)
     .then((response) =>{
       reslove(response);
-      alert(StringConstant.loginUpdated+response.data.email);
+      alert(StringConstant.logoutMsg +response.data.email);
     })
 
 .catch ((error) => reject(error));

@@ -15,7 +15,7 @@ export const registerAction = (users) => async (dispatch) => {
 
 
 // login action
-export const loginAction = (login) => (dispatch) => {
+export const loginAction = (login,callback) => (dispatch) => {
  LoginServiceCall.postApi(LoginApiConstant.postLogin,login)
     .then((res) => {
       console.log(res);
@@ -23,6 +23,7 @@ export const loginAction = (login) => (dispatch) => {
         type: "LOGIN",
         payload: res.data,
       });
+      callback(true)
     })
     .catch((error) => {
       console.log(error.response.data.message);
@@ -31,6 +32,7 @@ export const loginAction = (login) => (dispatch) => {
         type: "ERR_RES",
         payload: error.response.data.message,
       });
+      callback(false)
     });
 };
 
