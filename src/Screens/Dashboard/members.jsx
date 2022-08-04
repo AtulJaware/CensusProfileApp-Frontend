@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MemberApiConstant } from "../../Constants/ApiConstant";
 import { ServiceCall } from "../../Services/ServiceMethod";
 import { StringConstant } from "../../Constants/StringConstant";
@@ -8,6 +8,7 @@ import MembersSearchTable from "../../components/MembersSearchTable";
 import { Container, Button, Form, Row } from "react-bootstrap";
 
 const Members = () => {
+  let navigate = useNavigate();
   const [members, setMembers] = useState([]);
   const searchInput = useRef();
   const searchAction = useRef();
@@ -23,6 +24,7 @@ const Members = () => {
       })
       .catch((error) => console.log(error));
   }, []);
+
   const handlePerformClick = () => {
     console.log(
       "perforam profile",
@@ -42,8 +44,8 @@ const Members = () => {
       case "BY_ID":
         findById(searchInput.current.value);
         break;
-      // default:
-      //     alert("choose action to proceed");
+      default:
+        alert("choose action to proceed");
     }
   };
 
@@ -52,6 +54,7 @@ const Members = () => {
       ServiceCall.deleteApi(MemberApiConstant.deleteMember(memId))
         .then(() => {
           alert(StringConstant.memberDeleted + memId);
+          navigate("/member/add");
         })
         .catch((error) => {
           console.log(error);
