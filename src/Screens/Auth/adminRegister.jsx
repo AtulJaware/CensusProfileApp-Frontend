@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ServiceCall } from "../../Services/RegisterServiceMethods";
 import { AdminApiConstant } from "../../Constants/ApiConstant";
-import Joi from "joi-browser";
 import { useParams } from "react-router-dom";
-
+import { dispatch } from "react";
+import Joi from "joi-browser";
 const AdminRegister = () => {
   const params = useParams();
   console.log(params);
@@ -82,6 +82,7 @@ const AdminRegister = () => {
       .then(() => {
         navigate("/login");
       })
+
       .catch((error) => {
         console.log(error);
         setErrRes(adminl.errMsg);

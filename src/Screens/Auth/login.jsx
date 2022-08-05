@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAction } from "../../AppState/Actions/loginactions";
+import { loginAction } from "../../AppState/actions/loginactions";
 import { StringConstant } from "../../Constants/StringConstant";
 import Joi from "joi-browser";
 
