@@ -6,7 +6,6 @@ import { UserServiceCall } from "../../Services/ServiceMethod";
 import { StringConstant } from "../../Constants/StringConstant";
 import UsersSearchTable from "../../components/UsersSearchTable";
 import { Container, Button, Form, Row } from "react-bootstrap";
-import { NOT_FOUND } from "../../Constants/StringConstant";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -24,7 +23,7 @@ const Users = () => {
       })
       .catch((error) => console.log(error));
   }, []);
-  
+
   const handlePerformClick = () => {
     console.log(
       "perforam profile",
@@ -68,9 +67,7 @@ const Users = () => {
     const searchRes = [];
 
     users.map((user) => {
-      if (user.lastName == name) {
-        searchRes.push(user);
-      } else alert(NOT_FOUND.LAST + name);
+      if (user.lastName == name) searchRes.push(user);
     });
     setSearchResult(searchRes);
     setShowUserstable(false);
@@ -81,37 +78,29 @@ const Users = () => {
     setSearchResult([]);
     const searchRes = [];
     users.map((user) => {
-      if (user.firstName == name) {
-        searchRes.push(user);
-      } else alert(NOT_FOUND.FIRST + name);
+      if (user.firstName == name) searchRes.push(user);
     });
     setSearchResult(searchRes);
     setShowUserstable(false);
     setShowSearchUser(true);
   };
-
 
   const findByEmail = (name) => {
     setSearchResult([]);
     const searchRes = [];
     users.map((user) => {
-      if (user.login.email == name) {
-        searchRes.push(user);
-      } else alert(NOT_FOUND.EMAIL + name);
+      if (user.login.email == name) searchRes.push(user);
     });
     setSearchResult(searchRes);
     setShowUserstable(false);
     setShowSearchUser(true);
   };
 
-
   const findByFnameDOB = (dob) => {
     setSearchResult([]);
     const searchRes = [];
     users.map((user) => {
-      if (user.dob == dob) {
-        searchRes.push(user);
-      } else alert(NOT_FOUND.DOB + dob);
+      if (user.dob == dob) searchRes.push(user);
     });
     setSearchResult(searchRes);
     setShowUserstable(false);
@@ -121,9 +110,7 @@ const Users = () => {
     setSearchResult([]);
     const searchRes = [];
     users.map((user) => {
-      if (user.userId == userId) {
-        searchRes.push(user);
-      } else alert(NOT_FOUND.ID + userId);
+      if (user.userId == userId) searchRes.push(user);
     });
     setSearchResult(searchRes);
     setShowUserstable(false);
@@ -156,7 +143,7 @@ const Users = () => {
               <td>{user.dob}</td>
               <td>{user.contactNo}</td>
               <td>{user.login.email}</td>
-              
+
               <td>
                 <Link to={`/user/update/${user.userId}`}>
                   <i className="bi bi-pencil-square me-3" type="button"></i>
@@ -202,9 +189,7 @@ const Users = () => {
         </Row>
       </Container>
       <br />
-      {showSearchUser ? (
-        <UsersSearchTable searchResult={searchResult} />
-      ) : null}
+      {showSearchUser ? <UsersSearchTable searchResult={searchResult} /> : null}
     </div>
   );
 };

@@ -6,7 +6,7 @@ export const REQUEST_METHODS = {
 };
 
 export const ServiceCall = {
-  postApi: (url, user) => {
+  userPostApi: (url, user) => {
     return new Promise(function (resolve, reject) {
       axios
         .post(url, user)
@@ -18,7 +18,7 @@ export const ServiceCall = {
     });
   },
 
- postApi: (url, admin) => {
+  postApi: (url, admin) => {
     return new Promise(function (resolve, reject) {
       axios
         .post(url, admin)
@@ -29,5 +29,4 @@ export const ServiceCall = {
         .catch((error) => reject(error));
     });
   },
-
 };
