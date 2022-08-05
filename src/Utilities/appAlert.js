@@ -1,1 +1,0 @@
- // export default  updateAppAlert =(message)=> alert(message);

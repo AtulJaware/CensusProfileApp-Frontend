@@ -11,13 +11,13 @@ const UpdateAdmin = () => {
 
   // define state
   const [admin, setAdmin] = useState({
-    
     adminId: "",
     name: "",
     contact: "",
-    email: "",
-    password: "",
-    role: "Admin",
+    login: {
+      email: "",
+      password: "",
+    },
   });
 
   //useEffect(callback function,[condition] )
@@ -43,23 +43,43 @@ const UpdateAdmin = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    AdminServiceCall.putApi(AdminApiConstant.putAdmin(params.adminId),admin);
+    AdminServiceCall.putApi(AdminApiConstant.putAdmin(params.adminId),admin)
+    .then(() => {
+      navigate("/admins");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   };
   return (
     <div>
       <div className="w-50 mx-auto mt-3">
         <p className="display-6">Update Admin</p>
         <form className="border p-3" onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="Name" className="form-label float-start">
-              Name
+        <div className="mb-3">
+            <label htmlFor="adminId" className="form-label float-start">
+              Admin ID
             </label>
             <input
               type="text"
               className="form-control"
-              id="Name"
-              value={admin.Name}
-              name="Name"
+              id="adminId"
+              value={admin.adminId}
+              name="adminId"
+              onChange={handleChange}
+              disabled
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label float-start">
+              Admin Name
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              value={admin.name}
+              name="name"
               onChange={handleChange}
             />
           </div>
@@ -84,7 +104,7 @@ const UpdateAdmin = () => {
               type="text"
               className="form-control"
               id="email"
-              value={admin.email}
+              value={admin.login.email}
               name="email"
               onChange={handleChange}
             />
@@ -98,7 +118,7 @@ const UpdateAdmin = () => {
               className="form-control"
               id="password"
               name="password"
-              value={admin.password}
+              value={admin.login.password}
               onChange={handleChange}
             />
           </div>
@@ -107,9 +127,9 @@ const UpdateAdmin = () => {
             Submit
           </button>
         </div>
-          </form>
-          </div>
-          </div>
+      </form>
+    </div>
+  </div>
 
   );
 };

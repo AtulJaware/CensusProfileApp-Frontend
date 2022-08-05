@@ -26,7 +26,7 @@ export const Nav = () => (
       <Route path="/" element={<Home />} />
       <Route path="/admins" element={<Admins />} />
       <Route path="/admin/add" element={<AddAdmin />} />
-      <Route path="/admin/update/:id" element={<UpdateAdmin />} />
+      <Route path="/admin/update/:adminId" element={<UpdateAdmin />} />
       <Route path={ScreenName().HOME} element={<Navigate to="/" replace />} />
       <Route path={ScreenName().MEMBERS} element={<Members />} />
       <Route path={ScreenName().LOGIN_SCREEN} element={<Login />} />

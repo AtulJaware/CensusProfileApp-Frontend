@@ -72,7 +72,7 @@ const Login = () => {
         alert(StringConstant.successMessage);
         navigate("/home");
       } else {
-        console.log("*********" + lgn.errMsg);
+        console.log("***" + lgn.errMsg);
         setErrRes(lgn.errMsg);
       }
     }, 1000);

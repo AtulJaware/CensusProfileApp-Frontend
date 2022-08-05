@@ -56,11 +56,11 @@ class Admins extends Component {
                 <td>{admin.name}</td>
                 <td>{admin.contact}</td>
                 <td>
-                  <Link to={`/admin/update/${admin.adminId}`}>
+                 <Link to={`/admin/update/${admin.adminId}`}>
                     <i className="bi bi-pencil-square me-3" type="button"></i>
                   </Link>
                   <i
-                    class="bi bi-trash3"
+                    className="bi bi-trash3"
                     type="button"
                     onClick={() => this.handleDelete(admin.adminId)}
                   ></i>
